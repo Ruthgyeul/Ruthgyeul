@@ -64,7 +64,7 @@
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjRpaTdxNTgxZ3RxM2p2MXloajFrZGgzMWdxNTFmYTM2ZnZ3aGt2biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h0ptiGj9tKTS19hnPL/giphy.gif" width="45px"> Academic Background
 [<img align="left" height="94px" width="94px" background-color="#FFFFFF" alt="Inha University" src="https://www.inha.ac.kr/sites/kr/images/logo_2.png"/>](https://inha.ac.kr/)
 **Computer Science Engineering Undergraduate** \
-[**IHU CSE**](https://cse.inha.ac.kr/)  • In progress (Year 1)\
+[**Inha CSE**](https://cse.inha.ac.kr/)  • In progress (Year 1)\
 Skills: `Professional Ethics` `Project Management` `Software Development` `Software Security` `Software Quality`
 
 <br>
