@@ -8,6 +8,7 @@
 <div align="center" style="margin-bottom:200px">
     <img width=45% align="center" src="https://github-readme-stats.vercel.app/api?username=RuthGyeul&theme=radical&show_icons=true" />
     <img width=40% align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RuthGyeul&layout=compact&theme=radical" />
+    [![코드트리|실력진단-ruthgyeul](https://banner.codetree.ai/v1/banner/ruthgyeul)](https://www.codetree.ai/profiles/ruthgyeul)
 </div>
 
 <br>
