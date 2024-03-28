@@ -11,8 +11,6 @@
     <img width=40% align="center" src="https://banner.codetree.ai/v1/banner/ruthgyeul" />
 </div>
 
-[![코드트리|실력진단-ruthgyeul](https://banner.codetree.ai/v1/banner/ruthgyeul)](https://www.codetree.ai/profiles/ruthgyeul)
-
 <br>
 
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjNqY29tdWpmMDBuajJyZGJ1anFiZXI5M3JobTdzMzhxcTB2M3VtcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8m4gPv1UFz1jmiCtKd/giphy.gif" width="45px"> Languages
