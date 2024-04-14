@@ -72,8 +72,8 @@ Skills: `Professional Ethics` `Project Management` `Software Development` `Softw
 
 ## <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXliZ21xOW5kZ2JzOWl5bDN3YTRxcXl2dDRuaHk4eXY5MnI1a2JpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FtwfYSbxTJbETt2CVm/giphy.gif" width="45px"> Performance
 
-|소속|직책|역할 설명|기간|
-|---|---|---|---|
+|소속|직책|기간|
+|---|---|---|
 |Team Crescent|팀장/백엔드|2024~|
 |IGRUS|기술부 부원|2024~|
 |Team Barcode|부팀장/풀스텍/웹앱/AI|2022~|
