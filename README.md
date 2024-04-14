@@ -71,6 +71,14 @@ Skills: `Professional Ethics` `Project Management` `Software Development` `Softw
 <br>
 
 ## <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXliZ21xOW5kZ2JzOWl5bDN3YTRxcXl2dDRuaHk4eXY5MnI1a2JpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FtwfYSbxTJbETt2CVm/giphy.gif" width="45px"> Performance
+
+|소속|직책|역할 설명|기간|
+|-----|-----|-----|
+|Team Crescent|팀장/백엔드|2024~|
+|IGRUS|기술부 부원|2024~|
+|Team Barcode|부팀장/풀스텍/웹앱/AI|2022~|
+|Team Undefined|팀장/웹 백엔드|2019~2022|
+
 **제10회 대한민국 SW융합 해커톤 대회** \
 **지정과제 1 부문 우수상 (2위)**  • 팀 BARCODE 부팀장 및 메인 개발자\
 Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQL DB Management` `Apache2 Management` `Ubuntu Server Management`
