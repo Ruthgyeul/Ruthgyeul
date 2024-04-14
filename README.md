@@ -80,7 +80,7 @@ Skills: `Professional Ethics` `Project Management` `Software Development` `Softw
 |Team Undefined|팀장/웹 백엔드|2019~2022|
 
 
-**2023/08 제10회 대한민국 SW융합 해커톤 대회** \
+**[2023/08] 제10회 대한민국 SW융합 해커톤 대회** \
 **지정과제 1 부문 우수상 (2위)**  • 팀 BARCODE 부팀장 및 메인 개발자\
 Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQL DB Management` `Apache2 Management` `Ubuntu Server Management`
 
