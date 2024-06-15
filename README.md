@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=FF3670&size=35&center=true&vCenter=true&width=1000&lines=Welcome+to+my+GitHub+page!;My+name+is+Jaeah+Lee;I'm+BackEnd/AI+Developer!)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=FF3670&size=35&center=true&vCenter=true&width=1000&lines=Welcome+to+my+GitHub+page!;My+name+is+Jaeah+Lee;I'm+Studying+At+Inha+Univ.+!)](https://git.io/typing-svg)
 
 <h3 align="center">"Ehe Te Nandayo!"</h3>
 <h4 align="center">- Paimon -</h4>
