@@ -1,6 +1,6 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=FF3670&size=35&center=true&vCenter=true&width=1000&lines=My+name+is+Jaeah+Lee+!;I'm+Studying+At+Inha+University+!)](https://git.io/typing-svg)
 
-<h3 align="center">"Don't Stop. Keep Going!"</h3>
+<h3 align="center">"Don't Stop. Keep Coding!"</h3>
 <h4 align="center">- ? -</h4>
 
 <br>
