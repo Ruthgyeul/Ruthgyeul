@@ -28,11 +28,14 @@
 
 ### Learning
 [<img height="48px" width="48px" alt="Icone Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
+[<img height="48px" width="48px" alt="Icone Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
+[<img height="48px" width="48px" alt="Icone ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
 [<img height="48px" width="48px" alt="Icone PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
 <br>
 
 ## <img src="https://media.giphy.com/media/HwBlFQZFcAoUcPHZdX/giphy.gif" width="45px"> Frameworks
+[<img height="48px" width="48px" alt="Icone Flask" src="https://skillicons.dev/icons?i=flask"/>](https://flask.palletsprojects.com/en/3.0.x/)
 [<img height="48px" width="48px" alt="Icone OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
 [<img height="48px" width="48px" alt="Icone Tensorflow" src="https://skillicons.dev/icons?i=tensorflow"/>](https://www.tensorflow.org/)
 [<img height="48px" width="48px" alt="Icone PyTorch" src="https://skillicons.dev/icons?i=pytorch"/>](https://pytorch.org/)
@@ -43,8 +46,6 @@
 ## <img src="https://media.giphy.com/media/iDaCeaKrHhUI1I8e2b/giphy.gif" width="45px"> Software & Tools:
 [<img height="48px" width="48px" alt="Icone VS-Code" src="https://skillicons.dev/icons?i=vscode"/>](https://code.visualstudio.com/)
 [<img height="48px" width="48px" alt="Icone IntelliJ IDEA" src="https://skillicons.dev/icons?i=idea"/>](https://www.jetbrains.com/idea/)
-[<img height="48px" width="48px" alt="Icone Replit" src="https://skillicons.dev/icons?i=replit"/>](https://replit.com/~)
-[<img height="48px" width="48px" alt="Icone Arduino" src="https://skillicons.dev/icons?i=arduino"/>](https://www.arduino.cc/)
 
 [<img height="48px" width="48px" alt="Icone Git" src="https://skillicons.dev/icons?i=git"/>](https://git-scm.com/)
 
@@ -52,13 +53,14 @@
 [<img height="48px" width="48px" alt="Icone Firebase" src="https://skillicons.dev/icons?i=firebase"/>](https://firebase.google.com/)
 [<img height="48px" width="48px" alt="Icone Cloudflare" src="https://skillicons.dev/icons?i=cloudflare"/>](https://www.cloudflare.com/)
 
-[<img height="48px" width="48px" alt="Icone Linux" src="https://skillicons.dev/icons?i=linux"/>](https://www.linux.org/)
+[<img height="48px" width="48px" alt="Icone Ubuntu" src="https://skillicons.dev/icons?i=ubuntu"/>](https://ubuntu.com/)
 [<img height="48px" width="48px" alt="Icone Raspberry Pi" src="https://skillicons.dev/icons?i=raspberrypi"/>](https://www.raspberrypi.com/)
 [<img height="48px" width="48px" alt="Icone PowerShell" src="https://skillicons.dev/icons?i=powershell"/>](https://learn.microsoft.com/en-us/powershell/)
 
 ### Learning
-[<img height="48px" width="48px" alt="Icone Android Studio" src="https://skillicons.dev/icons?i=androidstudio"/>](https://developer.android.com/)
 [<img height="48px" width="48px" alt="Icone Docker" src="https://skillicons.dev/icons?i=docker"/>](https://www.docker.com/)
+[<img height="48px" width="48px" alt="Icone Kali Linux" src="https://skillicons.dev/icons?i=kali"/>](https://www.kali.org/)
+[<img height="48px" width="48px" alt="Icone Figma" src="https://skillicons.dev/icons?i=figma"/>](https://www.figma.com/)
 
 <br>
 
@@ -111,6 +113,7 @@ Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQ
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30px"> Contact me
 [<img height="48px" width="48px" alt="Icone Github" src="https://skillicons.dev/icons?i=github"/>](https://github.com/RuthGyeul)
 [<img height="48px" width="48px" alt="Icone Instagram" src="https://skillicons.dev/icons?i=instagram"/>](https://www.instagram.com/jae.__.ah/)
+[<img height="48px" width="48px" alt="Icone Linkedin" src="https://skillicons.dev/icons?i=linkedin"/>](https://www.linkedin.com/in/jaeah-l-831386311/)
 [<img height="48px" width="48px" alt="Icone Stackoverflow" src="https://skillicons.dev/icons?i=stackoverflow"/>](https://stackoverflow.com/users/20248646/ruthgyeul)
 
 -------
