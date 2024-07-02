@@ -18,15 +18,14 @@
 [<img height="48px" width="48px" alt="Icone Python" src="https://skillicons.dev/icons?i=py"/>](https://www.python.org/)
 [<img height="48px" width="48px" alt="Icone NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
 
+[<img height="48px" width="48px" alt="Icone C" src="https://skillicons.dev/icons?i=c"/>](https://www.cprogramming.com/)
+[<img height="48px" width="48px" alt="Icone CPP" src="https://skillicons.dev/icons?i=cpp"/>](https://www.cplusplus.com/)
+
 [<img height="48px" width="48px" alt="Icone HTML5" src="https://skillicons.dev/icons?i=html"/>](https://www.w3schools.com/html/)
 [<img height="48px" width="48px" alt="Icone CSS" src="https://skillicons.dev/icons?i=css"/>](https://www.w3schools.com/css)
 [<img height="48px" width="48px" alt="Icone JavaScript" src="https://skillicons.dev/icons?i=js"/>](https://www.javascript.com/)
 
-[<img height="48px" width="48px" alt="Icone Discord Bot" src="https://skillicons.dev/icons?i=bots"/>](https://discord.js.org/)
-
 ### Learning
-[<img height="48px" width="48px" alt="Icone C" src="https://skillicons.dev/icons?i=c"/>](https://www.cprogramming.com/)
-[<img height="48px" width="48px" alt="Icone CPP" src="https://skillicons.dev/icons?i=cpp"/>](https://www.cplusplus.com/)
 [<img height="48px" width="48px" alt="Icone Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
 [<img height="48px" width="48px" alt="Icone PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
@@ -42,6 +41,7 @@
 
 ## <img src="https://media.giphy.com/media/iDaCeaKrHhUI1I8e2b/giphy.gif" width="45px"> Software & Tools:
 [<img height="48px" width="48px" alt="Icone VS-Code" src="https://skillicons.dev/icons?i=vscode"/>](https://code.visualstudio.com/)
+[<img height="48px" width="48px" alt="Icone IntelliJ IDEA" src="https://skillicons.dev/icons?i=idea"/>](https://www.jetbrains.com/idea/)
 [<img height="48px" width="48px" alt="Icone Replit" src="https://skillicons.dev/icons?i=replit"/>](https://replit.com/~)
 [<img height="48px" width="48px" alt="Icone Arduino" src="https://skillicons.dev/icons?i=arduino"/>](https://www.arduino.cc/)
 
@@ -56,7 +56,6 @@
 [<img height="48px" width="48px" alt="Icone PowerShell" src="https://skillicons.dev/icons?i=powershell"/>](https://learn.microsoft.com/en-us/powershell/)
 
 ### Learning
-[<img height="48px" width="48px" alt="Icone IntelliJ IDEA" src="https://skillicons.dev/icons?i=idea"/>](https://www.jetbrains.com/idea/)
 [<img height="48px" width="48px" alt="Icone Android Studio" src="https://skillicons.dev/icons?i=androidstudio"/>](https://developer.android.com/)
 [<img height="48px" width="48px" alt="Icone Docker" src="https://skillicons.dev/icons?i=docker"/>](https://www.docker.com/)
 
@@ -66,7 +65,7 @@
 [<img align="left" height="94px" width="94px" background-color="#FFFFFF" alt="Inha University" src="https://www.inha.ac.kr/sites/kr/images/logo_2.png"/>](https://inha.ac.kr/)
 **Computer Science Engineering Undergraduate** \
 [**Inha CSE**](https://cse.inha.ac.kr/)  • In progress (Year 1)\
-Skills: `Professional Ethics` `Project Management` `Software Development` `Software Security` `Software Quality`
+Skills: `AWS` `Java` `Data Structure` `Algorithm` `Computer Structure`
 
 <br>
 
