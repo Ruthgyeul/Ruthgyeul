@@ -6,10 +6,10 @@
 <br>
 
 <div align="center" style="margin-bottom:200px">
-    <img width=40% align="center" src="https://github-readme-stats.vercel.app/api?username=RuthGyeul&theme=radical&show_icons=true" />
-    <img width=40% align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RuthGyeul&layout=compact&theme=radical" />
-    <img width=40% align="center" src="https://banner.codetree.ai/v1/banner/ruthgyeul" />
-    <img width=40% align="center" src="http://mazassumnida.wtf/api/v2/generate_badge?boj=ruthgyeul" />
+    <img height=40% align="center" src="https://github-readme-stats.vercel.app/api?username=RuthGyeul&theme=radical&show_icons=true" />
+    <img height=40% align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RuthGyeul&layout=compact&theme=radical" />
+    <img height=40% align="center" src="https://banner.codetree.ai/v1/banner/ruthgyeul" />
+    <img height=40% align="center" src="http://mazassumnida.wtf/api/v2/generate_badge?boj=ruthgyeul" />
 </div>
 
 <br>
