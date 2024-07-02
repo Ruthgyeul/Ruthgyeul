@@ -94,8 +94,8 @@ Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQ
 
 |자격증|취득 날짜|
 |---|---|
-|AWS SAA|In-Progress|
-|SQLD|In-Progress|
+|AWS Solutions Architect Associate|In-Progress|
+|SQL Developer|In-Progress|
 
 <br>
 
