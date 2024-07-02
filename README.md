@@ -17,8 +17,6 @@
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjNqY29tdWpmMDBuajJyZGJ1anFiZXI5M3JobTdzMzhxcTB2M3VtcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8m4gPv1UFz1jmiCtKd/giphy.gif" width="45px"> Languages
 ### Main
 [<img height="48px" width="48px" alt="Icone Python" src="https://skillicons.dev/icons?i=py"/>](https://www.python.org/)
-[<img height="48px" width="48px" alt="Icone NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
-
 [<img height="48px" width="48px" alt="Icone C" src="https://skillicons.dev/icons?i=c"/>](https://www.cprogramming.com/)
 [<img height="48px" width="48px" alt="Icone CPP" src="https://skillicons.dev/icons?i=cpp"/>](https://www.cplusplus.com/)
 
@@ -28,18 +26,23 @@
 
 ### Learning
 [<img height="48px" width="48px" alt="Icone Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
-[<img height="48px" width="48px" alt="Icone Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
-[<img height="48px" width="48px" alt="Icone ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
 [<img height="48px" width="48px" alt="Icone PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
 <br>
 
 ## <img src="https://media.giphy.com/media/HwBlFQZFcAoUcPHZdX/giphy.gif" width="45px"> Frameworks
+[<img height="48px" width="48px" alt="Icone NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
+
 [<img height="48px" width="48px" alt="Icone Flask" src="https://skillicons.dev/icons?i=flask"/>](https://flask.palletsprojects.com/en/3.0.x/)
 [<img height="48px" width="48px" alt="Icone OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
 [<img height="48px" width="48px" alt="Icone Tensorflow" src="https://skillicons.dev/icons?i=tensorflow"/>](https://www.tensorflow.org/)
 [<img height="48px" width="48px" alt="Icone PyTorch" src="https://skillicons.dev/icons?i=pytorch"/>](https://pytorch.org/)
+
 [<img height="48px" width="48px" alt="Icone MySQL" src="https://skillicons.dev/icons?i=mysql"/>](https://www.mysql.com/)
+
+### Learning
+[<img height="48px" width="48px" alt="Icone Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
+[<img height="48px" width="48px" alt="Icone ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
 
 <br>
 
@@ -55,7 +58,6 @@
 
 [<img height="48px" width="48px" alt="Icone Ubuntu" src="https://skillicons.dev/icons?i=ubuntu"/>](https://ubuntu.com/)
 [<img height="48px" width="48px" alt="Icone Raspberry Pi" src="https://skillicons.dev/icons?i=raspberrypi"/>](https://www.raspberrypi.com/)
-[<img height="48px" width="48px" alt="Icone PowerShell" src="https://skillicons.dev/icons?i=powershell"/>](https://learn.microsoft.com/en-us/powershell/)
 
 ### Learning
 [<img height="48px" width="48px" alt="Icone Docker" src="https://skillicons.dev/icons?i=docker"/>](https://www.docker.com/)
