@@ -72,12 +72,12 @@ Skills: `Professional Ethics` `Project Management` `Software Development` `Softw
 
 ## <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXliZ21xOW5kZ2JzOWl5bDN3YTRxcXl2dDRuaHk4eXY5MnI1a2JpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FtwfYSbxTJbETt2CVm/giphy.gif" width="45px"> Performance
 
-|소속|직책|기간|
+|소속|담당|기간|
 |---|---|---|
-|Team Crescent|`팀장` `백엔드`|2024~|
-|IGRUS|`기술부 부원`|2024~|
-|Team Barcode|`부팀장` `풀스텍` `웹앱` `AI`|2022~|
-|Team Undefined|`팀장` `웹 백엔드`|2019~2022|
+|Team Crescent|`팀장` `백엔드`|2024/04~|
+|인하대 학술 동아리 IGRUS|`기술부 부원`|2024/03~|
+|Team BarcoDev3|`팀장` `프론트엔드` `웹/앱` `인프라` `서버` |2024/06~2024/12|
+|Team Barcode|`부팀장` `풀스택` `웹` `컴퓨터비전`|2022/06~2024/01|
 
 
 **[2023/08] 제10회 대한민국 SW융합 해커톤 대회** \
