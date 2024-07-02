@@ -90,10 +90,18 @@ Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQ
 
 <br>
 
+## <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXliZ21xOW5kZ2JzOWl5bDN3YTRxcXl2dDRuaHk4eXY5MnI1a2JpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FtwfYSbxTJbETt2CVm/giphy.gif" width="45px"> Certification
+
+|자격증|취득 날짜|
+|---|---|
+|AWS SAA|In-Progress|
+|SQLD|In-Progress|
+
+<br>
+
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30px"> Contact me
 [<img height="48px" width="48px" alt="Icone Github" src="https://skillicons.dev/icons?i=github"/>](https://github.com/RuthGyeul)
 [<img height="48px" width="48px" alt="Icone Instagram" src="https://skillicons.dev/icons?i=instagram"/>](https://www.instagram.com/jae.__.ah/)
-[<img height="48px" width="48px" alt="Icone Discord" src="https://skillicons.dev/icons?i=discord"/>](https://discord.gg/6hXauZaGqQ)
 [<img height="48px" width="48px" alt="Icone Stackoverflow" src="https://skillicons.dev/icons?i=stackoverflow"/>](https://stackoverflow.com/users/20248646/ruthgyeul)
 
 -------
