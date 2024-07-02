@@ -75,14 +75,19 @@ Skills: `Professional Ethics` `Project Management` `Software Development` `Softw
 |소속|담당|기간|
 |---|---|---|
 |Team Crescent|`팀장` `백엔드`|2024/04~|
-|인하대 학술 동아리 IGRUS|`기술부 부원`|2024/03~|
 |Team BarcoDev3|`팀장` `프론트엔드` `웹/앱` `인프라` `서버` |2024/06~2024/12|
-|Team Barcode|`부팀장` `풀스택` `웹` `컴퓨터비전`|2022/06~2024/01|
+|인하대 학술 동아리 IGRUS|`기술부 부원`|2024/03~2024/12|
+|Team BARCODE|`부팀장` `풀스택` `웹` `컴퓨터비전`|2022/06~2024/01|
+
+
+**[2024/08] 제11회 대한민국 SW융합 해커톤 대회** \
+**지정과제 1 부문 ???**  • 팀 BarcoDev3 팀장 및 기획자\
+Skills: `Team Leader` `PM` `AWS Solutions Architect` `Linux Server Management` `Git Management`
 
 
 **[2023/08] 제10회 대한민국 SW융합 해커톤 대회** \
 **지정과제 1 부문 우수상 (2위)**  • 팀 BARCODE 부팀장 및 메인 개발자\
-Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQL DB Management` `Apache2 Management` `Ubuntu Server Management`
+Skills: `Co-Team Leader` `Main Developer` `Server/BackEnd/Web Development` `MySQL DB Management` `Apache2 Management` `Linux Server Management`
 
 <br>
 
