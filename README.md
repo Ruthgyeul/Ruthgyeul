@@ -32,8 +32,8 @@
 
 ## <img src="https://media.giphy.com/media/HwBlFQZFcAoUcPHZdX/giphy.gif" width="45px"> Frameworks
 [<img height="48px" width="48px" alt="Icone NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
-
 [<img height="48px" width="48px" alt="Icone Flask" src="https://skillicons.dev/icons?i=flask"/>](https://flask.palletsprojects.com/en/3.0.x/)
+
 [<img height="48px" width="48px" alt="Icone OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
 [<img height="48px" width="48px" alt="Icone Tensorflow" src="https://skillicons.dev/icons?i=tensorflow"/>](https://www.tensorflow.org/)
 [<img height="48px" width="48px" alt="Icone PyTorch" src="https://skillicons.dev/icons?i=pytorch"/>](https://pytorch.org/)
