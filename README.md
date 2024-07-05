@@ -85,7 +85,7 @@ Skills: `AWS` `Java` `Data Structure` `Algorithm` `Computer Structure`
 
 
 **[2024/08] 제11회 대한민국 SW융합 해커톤 대회** \
-**지정과제 1 부문 ???**  • 팀 BarcoDev3 팀장 및 기획자\
+**지정과제 1 부문 ???**  • 팀 BarcoDev2 팀장 및 기획자\
 Skills: `Team Leader` `PM` `AWS Solutions Architect` `Linux Server Management` `Git Management`
 
 
