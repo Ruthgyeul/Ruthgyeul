@@ -79,7 +79,7 @@ Skills: `AWS` `Java` `Data Structure` `Algorithm` `Computer Structure`
 |소속|담당|기간|
 |---|---|---|
 |Team BarcoDev2|`팀장` `프론트엔드` `웹/앱` `AWS` `서버` |2024/06~2024/12|
-|인하대 학술 동아리 IGRUS|`기술부 부원`|2024/03~2024/12|
+|인하대 학술 동아리 IGRUS|`기술부 운영진`|2024/03~2024/08|
 |Team BARCODE|`부팀장` `풀스택` `웹` `컴퓨터비전`|2022/06~2024/01|
 
 
