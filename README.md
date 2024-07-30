@@ -32,6 +32,7 @@
 
 ## <img src="https://media.giphy.com/media/HwBlFQZFcAoUcPHZdX/giphy.gif" width="45px"> Frameworks
 [<img height="48px" width="48px" alt="Icone NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
+[<img height="48px" width="48px" alt="Icone ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
 [<img height="48px" width="48px" alt="Icone Flask" src="https://skillicons.dev/icons?i=flask"/>](https://flask.palletsprojects.com/en/3.0.x/)
 
 [<img height="48px" width="48px" alt="Icone OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
@@ -42,7 +43,6 @@
 
 ### Learning
 [<img height="48px" width="48px" alt="Icone Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
-[<img height="48px" width="48px" alt="Icone ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
 
 <br>
 
