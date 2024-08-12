@@ -89,6 +89,7 @@ Skills: `AWS` `Java` `Data Structure` `Computer Structure`
 
 |프로젝트 명|요약|담당|진행기간|
 |---|---|---|---|
+|[도담 스탯](https://dodam.today)|누군가의 스탯을 실시간으로 조회 및 분석한다|1인 개발|2024/08~|
 
 |자격증|취득 날짜|
 |---|---|
