@@ -82,21 +82,15 @@ Skills: `AWS` `Java` `Data Structure` `Algorithm` `Computer Structure`
 |2024 INHA SW NET-ZERO 공동 해커톤|운영진|2024/07|
 |인하대 학술 동아리 IGRUS|기술부 운영진|2024/03~2024/08|
 
+
 |대회명|수상|담당|기간|
 |---|---|---|---|
 |제10회 대한민국 SW융합 해커톤 대회|지정과제1 부문 우수상(2위)|인프라 관리 & 백엔드 개발자|2024/08/25~2024/08/27|
 
-<br>
-
-## <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXliZ21xOW5kZ2JzOWl5bDN3YTRxcXl2dDRuaHk4eXY5MnI1a2JpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FtwfYSbxTJbETt2CVm/giphy.gif" width="45px"> Project
 
 |프로젝트 명|요약|담당|진행기간|
 |---|---|---|---|
 
-
-<br>
-
-## <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXliZ21xOW5kZ2JzOWl5bDN3YTRxcXl2dDRuaHk4eXY5MnI1a2JpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FtwfYSbxTJbETt2CVm/giphy.gif" width="45px"> Certification
 
 |자격증|취득 날짜|
 |---|---|
