@@ -5,8 +5,10 @@
 <br>
 
 <div align="center">
+    
 |  Backend Development  |  Cloud Computing  |  Computer Vision AI  |  WEB 3.0  |  Blockchain  |
 |:---------------------:|:-----------------:|:-------------------:|:---------:|:------------:|
+
 </div>
 
 <br>
