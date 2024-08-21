@@ -4,12 +4,21 @@
 
 <br>
 
-<h3>I'm Interest in...</h3>
-- Backend
-- Cloud Computing
-- Computer Vision AI
-- WEB 3.0
-- Block Chain
+---
+
+<h3 align="center">🌟 Interests 🌟</h3>
+
+<p align="center">
+  <ul>
+    <li>Backend Development</li>
+    <li>Cloud Computing</li>
+    <li>Computer Vision AI</li>
+    <li>WEB 3.0</li>
+    <li>Blockchain</li>
+  </ul>
+</p>
+
+---
 
 <br>
 
