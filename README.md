@@ -4,21 +4,11 @@
 
 <br>
 
----
-
-<h3 align="center">🌟 Interests 🌟</h3>
-
-<p align="center">
-  <ul>
-    <li>Backend Development</li>
-    <li>Cloud Computing</li>
-    <li>Computer Vision AI</li>
-    <li>WEB 3.0</li>
-    <li>Blockchain</li>
-  </ul>
-</p>
-
----
+<p align="center">`Backend Development`</p>
+<p align="center">`Cloud Computing`</p>
+<p align="center">`Computer Vision AI`</p>
+<p align="center">`WEB 3.0`</p>
+<p align="center">`Blockchain`</p>
 
 <br>
 
