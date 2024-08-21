@@ -4,11 +4,8 @@
 
 <br>
 
-<p align="center">`Backend Development`</p>
-<p align="center">`Cloud Computing`</p>
-<p align="center">`Computer Vision AI`</p>
-<p align="center">`WEB 3.0`</p>
-<p align="center">`Blockchain`</p>
+|  Backend Development  |  Cloud Computing  |  Computer Vision AI  |  WEB 3.0  |  Blockchain  |
+|:---------------------:|:-----------------:|:-------------------:|:---------:|:------------:|
 
 <br>
 
