@@ -33,6 +33,7 @@
 [<img height="48px" width="48px" alt="Icon JavaScript" src="https://skillicons.dev/icons?i=js"/>](https://www.javascript.com/)
 
 ### Learning
+[<img height="48px" width="48px" alt="Icon Solidity" src="https://docs.soliditylang.org/en/v0.8.7/_images/logo.svg"/>](https://soliditylang.org/)
 [<img height="48px" width="48px" alt="Icon Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
 [<img height="48px" width="48px" alt="Icon PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
@@ -49,12 +50,14 @@
 
 ### Learning
 [<img height="48px" width="48px" alt="Icon Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
+[<img height="48px" width="48px" alt="Icon TypeScript" src="https://skillicons.dev/icons?i=ts"/>](https://www.typescriptlang.org/)
 
 <br>
 
 ## <img src="https://media.giphy.com/media/iDaCeaKrHhUI1I8e2b/giphy.gif" width="45px"> Software & Tools:
 [<img height="48px" width="48px" alt="Icon VS-Code" src="https://skillicons.dev/icons?i=vscode"/>](https://code.visualstudio.com/)
 [<img height="48px" width="48px" alt="Icon IntelliJ IDEA" src="https://skillicons.dev/icons?i=idea"/>](https://www.jetbrains.com/idea/)
+[<img height="48px" width="48px" alt="Icon Vim" src="https://skillicons.dev/icons?i=vim"/>](https://www.vim.org/)
 
 [<img height="48px" width="48px" alt="Icon Git" src="https://skillicons.dev/icons?i=git"/>](https://git-scm.com/)
 
