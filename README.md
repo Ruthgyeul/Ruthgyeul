@@ -106,7 +106,6 @@ Skills: `AWS` `Java` `Data Structure` `Computer Structure`
 
 |자격증|취득 날짜|
 |---|---|
-|SQL Developer|In-Progress|
 
 <br>
 
