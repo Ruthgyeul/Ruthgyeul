@@ -101,7 +101,7 @@ Skills: `AWS` `Java` `Data Structure` `Computer Structure`
 
 |프로젝트 명|요약|담당|진행기간|
 |---|---|---|---|
-|[IN!PICK](https://github.com/2024-GDGoC-Iron/)|대학원 진학 목적 학생 대상 진로&관심사 기반 교수 AI 매칭 서비스|프론트엔드|2024/11/17~2024/11/26|
+|[IN!PICK](https://github.com/2024-GDGoC-Iron/)|대학원 진학 목적 학생 대상 진로&관심사 기반 교수 매칭 AI 서비스|프론트엔드|2024/11/17~2024/11/26|
 |[RCloud](https://ruthcloud.xyz)|클라우드 파일 저장 사이트|1인 개발|2024/08/15~|
 |[도담 스탯](https://dodam.today)|누군가의 스탯을 실시간으로 조회 및 분석한다|1인 개발|2024/08/10~|
 
