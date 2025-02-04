@@ -80,9 +80,16 @@
 
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjRpaTdxNTgxZ3RxM2p2MXloajFrZGgzMWdxNTFmYTM2ZnZ3aGt2biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h0ptiGj9tKTS19hnPL/giphy.gif" width="45px"> Academic Background
 [<img align="left" height="94px" width="94px" background-color="#FFFFFF" alt="Inha University" src="https://www.inha.ac.kr/sites/kr/images/logo_2.png"/>](https://inha.ac.kr/)
-**Computer Science Engineering Undergraduate** \
-[**Inha CSE**](https://cse.inha.ac.kr/)  • In progress (Year 2)\
+**Inha University CSE Undergraduate** \
+[**Computer Science Engineering**](https://cse.inha.ac.kr/)  • In progress (Year 2)\
 Skills: `AWS` `Java` `Data Structure` `Computer Structure`
+
+<br>
+
+[<img align="left" height="94px" width="94px" background-color="#FFFFFF" alt="Blockchain Valley" src="https://cdn-images-1.medium.com/v2/resize:fit:280/1*OntH6TQqtnNbVwnBNGQMbA@2x.png"/>](https://blog.blockchainvalley.ac/)
+**Blockchain Valley** \
+[**Development Team**](https://www.instagram.com/blockchain__valley/)  • Since 2024 (6th)\
+Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 
 <br>
 
