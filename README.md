@@ -97,6 +97,7 @@ Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 
 |소속|담당|기간|
 |---|---|---|
+|Hyperbolic Ambassador|Ambassador|2025/02~|
 |블록체인 밸리 6기|개발팀|2024/09~|
 |2024 알파코 청소년 디지털 문제해결 프로젝트|심화 프로그램 멘토|2024/08~2024/11|
 |2024 INHA SW NET-ZERO 공동 해커톤|운영진|2024/07|
