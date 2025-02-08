@@ -105,7 +105,7 @@ Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 
 |대회명|수상|담당|기간|
 |---|---|---|---|
-|[2025 Korean Blockchain Academic Conference](https://github.com/KOBAC-GroovyBet)|Zetachain상|백엔드 개발자|2025/01/15~2025/01/25|
+|[2025 Korea Blockchain Academic Conference](https://github.com/KOBAC-GroovyBet)|Zetachain상|백엔드 개발자|2025/01/15~2025/01/25|
 |[GDGoC Project Marathon 2nd](https://github.com/2024-GDGoC-Iron)|SW중심대학사업단장상(우수상, 2위)|프론트 개발자|2024/11/10~2024/11/26|
 |제10회 대한민국 SW융합 해커톤 대회|충청남도지사상(우수상, 2위)|인프라 관리 & 백엔드 개발자|2023/08/25~2023/08/27|
 
