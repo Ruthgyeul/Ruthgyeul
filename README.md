@@ -6,8 +6,8 @@
 
 <div align="center">
     
-|  WEB 3.0  |  Blockchain  |  Backend Development  |  Cloud Computing  |  Computer Vision AI  |
-|:---------------------:|:-----------------:|:-------------------:|:---------:|:------------:|
+|  WEB 3.0  |  Blockchain  |  Frontend Development  |  Cloud Computing  |
+|:---------:|:------------:|:----------------------:|:-----------------:|
 
 </div>
 
