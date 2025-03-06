@@ -88,7 +88,7 @@ Skills: `AWS` `Java` `Data Structure` `Computer Structure`
 
 [<img align="left" height="94px" width="94px" background-color="#FFFFFF" alt="Blockchain Valley" src="https://cdn-images-1.medium.com/v2/resize:fit:280/1*OntH6TQqtnNbVwnBNGQMbA@2x.png"/>](https://blog.blockchainvalley.ac/)
 **Blockchain Valley** \
-[**Development Team**](https://www.instagram.com/blockchain__valley/)  • Since 2024 (6th)\
+[**Development Team**](https://blog.blockchainvalley.ac/)  • Since 2024 (6th)\
 Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 
 <br>
