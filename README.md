@@ -97,13 +97,13 @@ Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 
 |Organization|Role|Duration|
 |---|---|---|
-|GDGoC at Inha|Core, Tech Team|2025/03~|
+|GDGoC at Inha|Core: Tech Team|2025/03~|
 |Arbitrum|Ambassador|2025/02~|
 |Hyperbolic|Ambassador|2025/02~|
 |Blockchain Valley 6th|Dev. Team Senior|2024/09~On Hold|
 |2024 알파코 청소년 디지털 문제해결 프로젝트|심화 프로그램 멘토|2024/08~2024/11|
 |2024 INHA SW NET-ZERO 공동 해커톤|운영진|2024/07|
-|인하대 프로그래밍 학술 동아리, IGRUS|기술부 운영진|2024/03~2024/08|
+|인하대 프로그래밍 학술 동아리, IGRUS|운영진: 기술부|2024/03~2024/08|
 
 |대회명|수상|담당|기간|
 |---|---|---|---|
