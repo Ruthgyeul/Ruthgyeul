@@ -6,7 +6,7 @@
 
 <div align="center">
     
-|  WEB 3.0  |  Blockchain  |  Frontend Development  |  Cloud Computing  |
+|  WEB 3.0  |  Blockchain  |  Full-Stack Development  |  Cloud Computing  |
 |:---------:|:------------:|:----------------------:|:-----------------:|
 
 </div>
