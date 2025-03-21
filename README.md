@@ -125,7 +125,7 @@ Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30px"> Contact me
 [<img height="48px" width="48px" alt="Icone Github" src="https://skillicons.dev/icons?i=github"/>](https://github.com/RuthGyeul)
 [<img height="48px" width="48px" alt="Icone Instagram" src="https://skillicons.dev/icons?i=instagram"/>](https://www.instagram.com/jae.__.ah/)
-[<img height="48px" width="48px" alt="Icone Linkedin" src="https://skillicons.dev/icons?i=linkedin"/>](https://www.linkedin.com/in/jaeah-l-831386311/)
+[<img height="48px" width="48px" alt="Icone Linkedin" src="https://skillicons.dev/icons?i=linkedin"/>](https://www.linkedin.com/in/leejaeah)
 [<img height="48px" width="48px" alt="Icone Stackoverflow" src="https://skillicons.dev/icons?i=stackoverflow"/>](https://stackoverflow.com/users/20248646/ruthgyeul)
 
 -------
