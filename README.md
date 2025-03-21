@@ -97,7 +97,7 @@ Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 
 |Organization|Role|Duration|
 |---|---|---|
-|GDGoC at Inha|Core: Tech Team|2025/03~|
+|GDGoC at Inha Core member|Tech Team Frontend|2025/03~|
 |Arbitrum|Ambassador|2025/02~|
 |Hyperbolic|Ambassador|2025/02~|
 |Blockchain Valley 6th|Dev. Team Senior|2024/09~On Hold|
