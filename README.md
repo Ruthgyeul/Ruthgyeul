@@ -105,19 +105,19 @@ Skills: `Blockchain` `dApp` `DAO` `Web3` `Solidity`
 |2024 INHA SW NET-ZERO 공동 해커톤|운영진||2024/07|
 |인하대 프로그래밍 학술 동아리, IGRUS|기술부 부원|운영진|2024/03~2024/08|
 
-|대회명|수상|담당|기간|
+|Contest Title|Award|Role|Duration|
 |---|---|---|---|
-|[2025 Korea Blockchain Academic Conference](https://github.com/KOBAC-GroovyBet)|Zetachain상|백엔드 개발자|2025/01/15~2025/01/25|
-|[GDGoC Project Marathon 2nd](https://github.com/2024-GDGoC-Iron)|SW중심대학사업단장상(우수상, 2위)|프론트 개발자|2024/11/10~2024/11/26|
-|제10회 대한민국 SW융합 해커톤 대회|충청남도지사상(우수상, 2위)|인프라 관리 & 백엔드 개발자|2023/08/25~2023/08/27|
+|[2025 Korea Blockchain Academic Conference](https://github.com/KOBAC-GroovyBet)|Zetachain상|BE Developer|2025/01/15~2025/01/25|
+|[GDGoC Project Marathon 2nd](https://github.com/2024-GDGoC-Iron)|SW중심대학사업단장상(우수상, 2위)|FE Developer|2024/11/10~2024/11/26|
+|제10회 대한민국 SW융합 해커톤 대회|충청남도지사상(우수상, 2위)|Service Architecture & BE Developer|2023/08/25~2023/08/27|
 
-|프로젝트 명|요약|담당|진행기간|
+|Project Title|Description|Role|Duration|
 |---|---|---|---|
 |[IN!PICK](https://github.com/2024-GDGoC-Iron)|대학원 진학 목적 학생 대상 진로&관심사 기반 교수 매칭 AI 서비스|프론트엔드|2024/11/17~2024/11/26|
 |[RCloud](https://ruthcloud.xyz)|클라우드 파일 저장 사이트|1인 개발|2024/08/15~|
 |[도담 스탯](https://dodam.today)|누군가의 스탯을 실시간으로 조회 및 분석한다|1인 개발|2024/08/10~|
 
-|자격증|취득 날짜|
+|Certificate|Issued|
 |---|---|
 
 <br>
