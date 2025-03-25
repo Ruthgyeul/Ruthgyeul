@@ -85,7 +85,7 @@
 
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjRpaTdxNTgxZ3RxM2p2MXloajFrZGgzMWdxNTFmYTM2ZnZ3aGt2biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h0ptiGj9tKTS19hnPL/giphy.gif" width="45px"> Academic Background
 [<img align="left" height="94px" width="94px" background-color="#FFFFFF" alt="Inha University" src="https://www.inha.ac.kr/sites/kr/images/logo_2.png"/>](https://inha.ac.kr/)
-**Inha University CSE Undergraduate** \
+**Inha University CSE 24' Undergraduate** \
 [**Computer Science Engineering**](https://cse.inha.ac.kr/)  • In progress (Year 2)\
 Skills: `AWS` `Data Structure` `Algorithm` `Java`
 
