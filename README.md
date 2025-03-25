@@ -112,6 +112,7 @@ Skills: `Blockchain` `Web3` `Solidity` `dApp` `DAO` `DID`
 
 |Contest Title|Award|Role|Duration|
 |---|---|---|---|
+|[AI로 그리는 혁신 비지니스 「2025 AI 해커톤」](https://github.com/ChainCert-Inha)|최우수상(1등, 나눔엔젤스&인하대 블록체인 센터)|Smart Contract|2025/03/25|
 |[2025 Korea Blockchain Academic Conference](https://github.com/KOBAC-GroovyBet)|Zetachain상|Backend|2025/01/15~2025/01/25|
 |[GDGoC Project Marathon 2nd](https://github.com/2024-GDGoC-Iron)|SW중심대학사업단장상(우수상, 2위)|Frontend|2024/11/10~2024/11/26|
 |제10회 대한민국 SW융합 해커톤 대회|충청남도지사상(우수상, 2위)|AWS Architecture & Backend|2023/08/25~2023/08/27|
