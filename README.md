@@ -22,50 +22,40 @@
 
 <br>
 
-## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjNqY29tdWpmMDBuajJyZGJ1anFiZXI5M3JobTdzMzhxcTB2M3VtcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8m4gPv1UFz1jmiCtKd/giphy.gif" width="45px"> Languages
+## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjNqY29tdWpmMDBuajJyZGJ1anFiZXI5M3JobTdzMzhxcTB2M3VtcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8m4gPv1UFz1jmiCtKd/giphy.gif" width="45px"> Languages & Frameworks
 ### Main
+[<img height="48px" width="48px" alt="Icon JavaScript" src="https://skillicons.dev/icons?i=js"/>](https://www.javascript.com/)
+[<img height="48px" width="48px" alt="Icon NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
+[<img height="48px" width="48px" alt="Icon ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
+[<img height="48px" width="48px" alt="Icon Nextjs" src="https://skillicons.dev/icons?i=nextjs"/>](https://nextjs.org/)
+
 [<img height="48px" width="48px" alt="Icon Python" src="https://skillicons.dev/icons?i=py"/>](https://www.python.org/)
 [<img height="48px" width="48px" alt="Icon C" src="https://skillicons.dev/icons?i=c"/>](https://www.cprogramming.com/)
 [<img height="48px" width="48px" alt="Icon CPP" src="https://skillicons.dev/icons?i=cpp"/>](https://www.cplusplus.com/)
 
-[<img height="48px" width="48px" alt="Icon HTML5" src="https://skillicons.dev/icons?i=html"/>](https://www.w3schools.com/html/)
-[<img height="48px" width="48px" alt="Icon CSS" src="https://skillicons.dev/icons?i=css"/>](https://www.w3schools.com/css)
-[<img height="48px" width="48px" alt="Icon JavaScript" src="https://skillicons.dev/icons?i=js"/>](https://www.javascript.com/)
+[<img height="48px" width="48px" alt="Icon Tailwind" src="https://skillicons.dev/icons?i=tailwind"/>](https://tailwindcss.com/)
+[<img height="48px" width="48px" alt="Icon OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
 
 ### Learning
 [<img height="48px" width="48px" alt="Icon Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
+[<img height="48px" width="48px" alt="Icon Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
+[<img height="48px" width="48px" alt="Icon TypeScript" src="https://skillicons.dev/icons?i=ts"/>](https://www.typescriptlang.org/)
 [<img height="48px" width="48px" alt="Icon Solidity" src="https://skillicons.dev/icons?i=solidity"/>](https://soliditylang.org/)
 [<img height="48px" width="48px" alt="Icon PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
 <br>
 
-## <img src="https://media.giphy.com/media/HwBlFQZFcAoUcPHZdX/giphy.gif" width="45px"> Frameworks
-[<img height="48px" width="48px" alt="Icon NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
-[<img height="48px" width="48px" alt="Icon ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
-[<img height="48px" width="48px" alt="Icon Nextjs" src="https://skillicons.dev/icons?i=nextjs"/>](https://nextjs.org/)
-
-[<img height="48px" width="48px" alt="Icon OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
-[<img height="48px" width="48px" alt="Icon Tailwind" src="https://skillicons.dev/icons?i=tailwind"/>](https://tailwindcss.com/)
-
-### Learning
-[<img height="48px" width="48px" alt="Icon Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
-[<img height="48px" width="48px" alt="Icon TypeScript" src="https://skillicons.dev/icons?i=ts"/>](https://www.typescriptlang.org/)
-
-<br>
-
 ## <img src="https://media.giphy.com/media/iDaCeaKrHhUI1I8e2b/giphy.gif" width="45px"> Software & Tools:
 [<img height="48px" width="48px" alt="Icon VS-Code" src="https://skillicons.dev/icons?i=vscode"/>](https://code.visualstudio.com/)
-[<img height="48px" width="48px" alt="Icon IntelliJ IDEA" src="https://skillicons.dev/icons?i=idea"/>](https://www.jetbrains.com/idea/)
 [<img height="48px" width="48px" alt="Icon Webstorm IDEA" src="https://skillicons.dev/icons?i=webstorm"/>](https://www.jetbrains.com/webstorm/)
+[<img height="48px" width="48px" alt="Icon IntelliJ IDEA" src="https://skillicons.dev/icons?i=idea"/>](https://www.jetbrains.com/idea/)
 [<img height="48px" width="48px" alt="Icon Vim" src="https://skillicons.dev/icons?i=vim"/>](https://www.vim.org/)
-
-[<img height="48px" width="48px" alt="Icon Git" src="https://skillicons.dev/icons?i=git"/>](https://git-scm.com/)
-[<img height="48px" width="48px" alt="Icon Docker" src="https://skillicons.dev/icons?i=docker"/>](https://www.docker.com/)
-[<img height="48px" width="48px" alt="Icon Anaconda" src="https://skillicons.dev/icons?i=anaconda"/>](https://www.anaconda.com/)
 
 [<img height="48px" width="48px" alt="Icon AWS" src="https://skillicons.dev/icons?i=aws"/>](https://aws.amazon.com/)
 [<img height="48px" width="48px" alt="Icon Firebase" src="https://skillicons.dev/icons?i=firebase"/>](https://firebase.google.com/)
 [<img height="48px" width="48px" alt="Icon Cloudflare" src="https://skillicons.dev/icons?i=cloudflare"/>](https://www.cloudflare.com/)
+[<img height="48px" width="48px" alt="Icon Git" src="https://skillicons.dev/icons?i=git"/>](https://git-scm.com/)
+[<img height="48px" width="48px" alt="Icon Docker" src="https://skillicons.dev/icons?i=docker"/>](https://www.docker.com/)
 
 [<img height="48px" width="48px" alt="Icon MySQL" src="https://skillicons.dev/icons?i=mysql"/>](https://www.mysql.com/)
 [<img height="48px" width="48px" alt="Icon MongoDB" src="https://skillicons.dev/icons?i=mongodb"/>](https://www.mongodb.com/)
@@ -76,9 +66,7 @@
 ### Learning
 [<img height="48px" width="48px" alt="Icon Fastapi" src="https://skillicons.dev/icons?i=fastapi"/>](https://www.kali.org/)
 [<img height="48px" width="48px" alt="Icon PostgreSQL" src="https://skillicons.dev/icons?i=postgres"/>](https://www.postgresql.org/)
-[<img height="48px" width="48px" alt="Icon Kubernetes" src="https://skillicons.dev/icons?i=kubernetes"/>](https://www.kali.org/)
-
-[<img height="48px" width="48px" alt="Icon Kali Linux" src="https://skillicons.dev/icons?i=kali"/>](https://www.kali.org/)
+[<img height="48px" width="48px" alt="Icon Kubernetes" src="https://skillicons.dev/icons?i=kubernetes"/>](https://kubernetes.io/)
 [<img height="48px" width="48px" alt="Icon Figma" src="https://skillicons.dev/icons?i=figma"/>](https://www.figma.com/)
 
 <br>
