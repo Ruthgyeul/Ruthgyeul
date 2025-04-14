@@ -9,6 +9,14 @@
 |  WEB 3.0  |  Blockchain  |  Full-Stack Development  |  Cloud Computing  |
 |:---------:|:------------:|:----------------------:|:-----------------:|
 
+<a href="https://www.gitanimals.org/en_US?utm_medium=image&utm_source=Ruthgyeul&utm_content=farm">
+<img
+  src="https://render.gitanimals.org/farms/Ruthgyeul"
+  width="600"
+  height="300"
+/>
+</a>
+
 </div>
 
 <br>
