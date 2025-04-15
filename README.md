@@ -33,6 +33,7 @@
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjNqY29tdWpmMDBuajJyZGJ1anFiZXI5M3JobTdzMzhxcTB2M3VtcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8m4gPv1UFz1jmiCtKd/giphy.gif" width="45px"> Languages & Frameworks
 ### Main
 [<img height="48px" width="48px" alt="Icon JavaScript" src="https://skillicons.dev/icons?i=js"/>](https://www.javascript.com/)
+[<img height="48px" width="48px" alt="Icon TypeScript" src="https://skillicons.dev/icons?i=ts"/>](https://www.typescriptlang.org/)
 [<img height="48px" width="48px" alt="Icon NodeJs" src="https://skillicons.dev/icons?i=nodejs"/>](https://nodejs.org/)
 [<img height="48px" width="48px" alt="Icon ReactJs" src="https://skillicons.dev/icons?i=react"/>](https://react.dev/)
 [<img height="48px" width="48px" alt="Icon Nextjs" src="https://skillicons.dev/icons?i=nextjs"/>](https://nextjs.org/)
@@ -47,7 +48,6 @@
 ### Learning
 [<img height="48px" width="48px" alt="Icon Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
 [<img height="48px" width="48px" alt="Icon Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
-[<img height="48px" width="48px" alt="Icon TypeScript" src="https://skillicons.dev/icons?i=ts"/>](https://www.typescriptlang.org/)
 [<img height="48px" width="48px" alt="Icon Solidity" src="https://skillicons.dev/icons?i=solidity"/>](https://soliditylang.org/)
 [<img height="48px" width="48px" alt="Icon PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
