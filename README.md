@@ -115,6 +115,7 @@ Skills: `Blockchain` `Web3` `Solidity` `dApp` `DAO` `DID`
 
 |Project Title|Description|Role|Duration|
 |---|---|---|---|
+|[StockPrice-Generator](https://github.com/stockPriceGenerator)|여러 랜덤 알고리즘을 활용한 모의 주식 가격 생성기 NPM 패키지|Develop|2025/04/14~|
 |[IN!PICK](https://github.com/2024-GDGoC-Iron)|대학원 진학 목적 학생 대상 진로&관심사 기반 교수 매칭 AI 서비스|Frontend|2024/11/17~2024/11/26|
 
 |Certificate|Issued|
