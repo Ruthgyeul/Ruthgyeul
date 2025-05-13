@@ -115,6 +115,8 @@ Skills: `Blockchain` `Web3` `Solidity` `dApp` `DAO` `DID`
 
 |Project Title|Description|Role|Duration|
 |---|---|---|---|
+|[GDGoC INHA Homepage](https://github.com/Ruthgyeul/24-2_GDGoC_Web)|GDGoC INHA 메인 홈페이지 개발|Frontend|2025/04/01~|
+|[GDGoC INHA Solution Gallery](https://github.com/Ruthgyeul/Solution-Gallery)|GDGoC INHA Solution Challenge Project Gallery|Frontend|2025/05/09~2025/05/15|
 |[StockPrice-Generator](https://github.com/Ruthgyeul/stockPriceGenerator)|여러 랜덤 알고리즘을 활용한 모의 주식 가격 생성기 NPM 패키지|Develop|2025/04/14~|
 |[IN!PICK](https://github.com/2024-GDGoC-Iron)|대학원 진학 목적 학생 대상 진로&관심사 기반 교수 매칭 AI 서비스|Frontend|2024/11/17~2024/11/26|
 
