@@ -1,5 +1,5 @@
 <div align="center" style="margin-bottom:200px">
-    <img src="https://raw.githubusercontent.com/Ruthgyeul/Ruthgyeul/refs/heads/main/header.png" />
+    <img src="https://raw.githubusercontent.com/Ruthgyeul/Ruthgyeul/refs/heads/main/mainheader.png" />
     <!--img src="https://raw.githubusercontent.com/cat-milk/Anime-Girls-Holding-Programming-Books/refs/heads/master/Systems/Mitsuha_Miyamizu_holding_Modern_Operating_Systems.png" height="300" /-->
     <img src="https://raw.githubusercontent.com/cat-milk/Anime-Girls-Holding-Programming-Books/refs/heads/master/AWS/Isla_Holding_Clould_AWS_Book.png" height="300" />
 
