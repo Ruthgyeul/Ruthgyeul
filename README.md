@@ -1,34 +1,31 @@
-<img src="https://raw.githubusercontent.com/Ruthgyeul/Ruthgyeul/refs/heads/main/header.png" />
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=FF3670&size=45&center=true&vCenter=true&width=1000&lines=Don't+Stop.+Keep+Coding!)](https://git.io/typing-svg)
-
-<br>
-
-<div align="center">
+<div align="center" style="margin-bottom:200px">
+    <img src="https://raw.githubusercontent.com/Ruthgyeul/Ruthgyeul/refs/heads/main/header.png" />
+    <!--img src="https://raw.githubusercontent.com/cat-milk/Anime-Girls-Holding-Programming-Books/refs/heads/master/Systems/Mitsuha_Miyamizu_holding_Modern_Operating_Systems.png" height="300" /-->
+    <img src="https://raw.githubusercontent.com/cat-milk/Anime-Girls-Holding-Programming-Books/refs/heads/master/AWS/Isla_Holding_Clould_AWS_Book.png" height="300" />
 
 |  WEB 3.0  |  Blockchain  |  Full-Stack Development  |  Cloud Computing  |
 |:---------:|:------------:|:----------------------:|:-----------------:|
 
-<a href="https://www.gitanimals.org/en_US?utm_medium=image&utm_source=Ruthgyeul&utm_content=farm">
-<img
-  src="https://render.gitanimals.org/farms/Ruthgyeul"
-  width="600"
-  height="300"
-/>
-</a>
-
 </div>
-
-<br>
 
 <div align="center" style="margin-bottom:200px">
-    <img height=150px align="center" src="https://github-readme-stats.vercel.app/api?username=RuthGyeul&theme=radical&show_icons=true" />
-    <img height=150px align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RuthGyeul&layout=compact&theme=radical" />
-    <!--img height=150px align="center" src="https://banner.codetree.ai/v1/banner/ruthgyeul" /-->
-    <img height=150px align="center" src="http://mazassumnida.wtf/api/v2/generate_badge?boj=ruthgyeul" />
+  <a href="https://www.gitanimals.org/en_US?utm_medium=image&utm_source=Ruthgyeul&utm_content=farm">
+    <img src="https://render.gitanimals.org/farms/Ruthgyeul" width="600" height="300" />
+  </a>
+
+  <br />
+  
+  <!-- https://github-readme-stats.vercel.app -->
+  <img height=150px align="center" src="https://github-readme-stats.shion.dev/api?username=RuthGyeul&theme=radical&show_icons=true" />
+  <img height=150px align="center" src="https://github-readme-stats.shion.dev/api/top-langs/?username=RuthGyeul&layout=compact&theme=radical" />
+  
+  <br />
+  
+  <!--img height=150px align="center" src="https://banner.codetree.ai/v1/banner/ruthgyeul" /-->
+  <img height=150px align="center" src="http://mazassumnida.wtf/api/v2/generate_badge?boj=ruthgyeul" />
 </div>
 
-<br>
+<br />
 
 ## <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjNqY29tdWpmMDBuajJyZGJ1anFiZXI5M3JobTdzMzhxcTB2M3VtcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8m4gPv1UFz1jmiCtKd/giphy.gif" width="45px"> Languages & Frameworks
 ### Main
@@ -41,14 +38,15 @@
 [<img height="48px" width="48px" alt="Icon Python" src="https://skillicons.dev/icons?i=py"/>](https://www.python.org/)
 [<img height="48px" width="48px" alt="Icon C" src="https://skillicons.dev/icons?i=c"/>](https://www.cprogramming.com/)
 [<img height="48px" width="48px" alt="Icon CPP" src="https://skillicons.dev/icons?i=cpp"/>](https://www.cplusplus.com/)
+[<img height="48px" width="48px" alt="Icon Solidity" src="https://skillicons.dev/icons?i=solidity"/>](https://soliditylang.org/)
+
+[<img height="48px" width="48px" alt="Icon Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
+[<img height="48px" width="48px" alt="Icon Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
 
 [<img height="48px" width="48px" alt="Icon Tailwind" src="https://skillicons.dev/icons?i=tailwind"/>](https://tailwindcss.com/)
 [<img height="48px" width="48px" alt="Icon OpenCV" src="https://skillicons.dev/icons?i=opencv"/>](https://opencv.org/)
 
 ### Learning
-[<img height="48px" width="48px" alt="Icon Java" src="https://skillicons.dev/icons?i=java"/>](https://www.java.com/)
-[<img height="48px" width="48px" alt="Icon Spring" src="https://skillicons.dev/icons?i=spring"/>](https://spring.io/)
-[<img height="48px" width="48px" alt="Icon Solidity" src="https://skillicons.dev/icons?i=solidity"/>](https://soliditylang.org/)
 [<img height="48px" width="48px" alt="Icon PHP" src="https://skillicons.dev/icons?i=php"/>](https://www.php.net/)
 
 <br>
@@ -64,8 +62,10 @@
 [<img height="48px" width="48px" alt="Icon Cloudflare" src="https://skillicons.dev/icons?i=cloudflare"/>](https://www.cloudflare.com/)
 [<img height="48px" width="48px" alt="Icon Git" src="https://skillicons.dev/icons?i=git"/>](https://git-scm.com/)
 [<img height="48px" width="48px" alt="Icon Docker" src="https://skillicons.dev/icons?i=docker"/>](https://www.docker.com/)
+[<img height="48px" width="48px" alt="Icon Kubernetes" src="https://skillicons.dev/icons?i=kubernetes"/>](https://kubernetes.io/)
 
 [<img height="48px" width="48px" alt="Icon MySQL" src="https://skillicons.dev/icons?i=mysql"/>](https://www.mysql.com/)
+[<img height="48px" width="48px" alt="Icon PostgreSQL" src="https://skillicons.dev/icons?i=postgres"/>](https://www.postgresql.org/)
 [<img height="48px" width="48px" alt="Icon MongoDB" src="https://skillicons.dev/icons?i=mongodb"/>](https://www.mongodb.com/)
 
 [<img height="48px" width="48px" alt="Icon Ubuntu" src="https://skillicons.dev/icons?i=ubuntu"/>](https://ubuntu.com/)
@@ -73,8 +73,6 @@
 
 ### Learning
 [<img height="48px" width="48px" alt="Icon Fastapi" src="https://skillicons.dev/icons?i=fastapi"/>](https://www.kali.org/)
-[<img height="48px" width="48px" alt="Icon PostgreSQL" src="https://skillicons.dev/icons?i=postgres"/>](https://www.postgresql.org/)
-[<img height="48px" width="48px" alt="Icon Kubernetes" src="https://skillicons.dev/icons?i=kubernetes"/>](https://kubernetes.io/)
 [<img height="48px" width="48px" alt="Icon Figma" src="https://skillicons.dev/icons?i=figma"/>](https://www.figma.com/)
 
 <br>
