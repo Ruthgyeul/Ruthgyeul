@@ -22,7 +22,6 @@
   <br />
   
   <!--img height=150px align="center" src="https://banner.codetree.ai/v1/banner/ruthgyeul" /-->
-  <img height=150px align="center" src="http://mazassumnida.wtf/api/v2/generate_badge?boj=ruthgyeul" />
 </div>
 
 <br />
@@ -72,7 +71,7 @@
 [<img height="48px" width="48px" alt="Icon Raspberry Pi" src="https://skillicons.dev/icons?i=raspberrypi"/>](https://www.raspberrypi.com/)
 
 ### Learning
-[<img height="48px" width="48px" alt="Icon Fastapi" src="https://skillicons.dev/icons?i=fastapi"/>](https://www.kali.org/)
+[<img height="48px" width="48px" alt="Icon Fastapi" src="https://skillicons.dev/icons?i=fastapi"/>](https://fastapi.tiangolo.com/)
 [<img height="48px" width="48px" alt="Icon Figma" src="https://skillicons.dev/icons?i=figma"/>](https://www.figma.com/)
 
 <br>
@@ -118,8 +117,8 @@ Skills: `Blockchain` `Web3` `Solidity` `dApp` `DAO` `DID`
 |[StockPrice-Generator](https://github.com/Ruthgyeul/stockPriceGenerator)|여러 랜덤 알고리즘을 활용한 모의 주식 가격 생성기 NPM 패키지|Develop|2025/04/14~|
 |[IN!PICK](https://github.com/2024-GDGoC-Iron)|대학원 진학 목적 학생 대상 진로&관심사 기반 교수 매칭 AI 서비스|Frontend|2024/11/17~2024/11/26|
 
-|Certificate|Issued|
-|---|---|
+<!--|Certificate|Issued|-->
+<!--|---|---|-->
 
 <br>
 
