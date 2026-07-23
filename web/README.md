@@ -1,7 +1,7 @@
 # ruthgyeul.xyz — portfolio site
 
-Personal portfolio for Jaeah Lee, built with **Next.js (App Router)** and shipped
-as a **fully static export** hosted on **Cloudflare Pages**.
+Personal portfolio for Jaeah Lee, built with **Next.js (App Router)** and
+self-hosted as a long-lived Node server (`next start`) at **ruthgyeul.xyz**.
 
 This lives inside the `Ruthgyeul/Ruthgyeul` GitHub profile repo, under `web/`.
 The profile `README.md` and `mainheader.png` at the repo root are unrelated to
@@ -9,16 +9,17 @@ this site and are left untouched.
 
 ## Why this stack
 
-- **Static export (`output: "export"`)** — the whole site is HTML/CSS/JS with no
-  server. All interactivity (boot animation, live clock, typing effect, ⌘K
-  command palette, KO/EN toggle, cursor spotlight) runs client-side.
-- **Availability** — served from Cloudflare's global edge; there is no origin to
-  go down.
-- **Scalability** — static assets on a CDN absorb any amount of traffic.
-- **Sustainability** — no runtime infrastructure to patch or pay for. All content
-  lives in one file (`src/lib/content.ts`), so updating the portfolio never
-  requires touching layout code. The font is self-hosted (no Google Fonts CDN
-  dependency at runtime).
+- **Next.js server build** — run as a persistent Node process behind a reverse
+  proxy, managed by systemd (`DefaultWeb.service`). Every page is statically
+  prerendered at build time, so the server mostly serves cached HTML.
+- **Availability** — systemd keeps the service up (`Restart=always`); putting
+  Cloudflare in front adds edge caching + DDoS protection.
+- **Scalability** — prerendered pages are cheap to serve; the process can be
+  replicated behind the proxy, and a CDN absorbs read traffic.
+- **Sustainability** — all content lives in one file (`src/lib/content.ts`), so
+  updating the portfolio never requires touching layout code. The font is
+  self-hosted (no Google Fonts CDN dependency at runtime), and security headers
+  are set in `next.config.ts`.
 
 ## Local development
 
@@ -31,7 +32,8 @@ npm run dev      # http://localhost:3000
 Other scripts:
 
 ```bash
-npm run build      # production build + static export to ./out
+npm run build      # production build (.next)
+npm run start      # run the production server (next start) on $PORT (default 3000)
 npm run typecheck  # tsc --noEmit
 npm run lint       # next lint
 ```
@@ -44,7 +46,7 @@ web/
 │   ├── app/
 │   │   ├── layout.tsx        # <html>, metadata/SEO, self-hosted font
 │   │   ├── page.tsx          # the dashboard (all client interactivity)
-│   │   ├── not-found.tsx     # 404 (exported as 404.html)
+│   │   ├── not-found.tsx     # 404 page
 │   │   ├── error.tsx         # client error boundary → 500 screen
 │   │   ├── sitemap.ts        # /sitemap.xml
 │   │   └── globals.css
@@ -52,7 +54,8 @@ web/
 │   └── lib/
 │       ├── content.ts        # ← EDIT THIS to change any site copy/data (KO/EN)
 │       └── theme.ts          # color tokens
-└── public/                   # favicon.svg, _headers, robots.txt
+├── next.config.ts            # server config + security headers
+└── public/                   # favicon.svg, robots.txt
 ```
 
 ### Updating content
@@ -62,31 +65,52 @@ education, links — is defined in [`src/lib/content.ts`](src/lib/content.ts) as
 bilingual (`{ ko, en }`) data. Add an award or a job by appending to the relevant
 array; no component changes needed.
 
-## Deploying to Cloudflare Pages
+## Deploying (self-hosted)
 
-### Option A — Git integration (recommended)
+The site runs on the server as a systemd service. The unit
+(`/etc/systemd/system/DefaultWeb.service`) runs `npm run start` from the app
+directory:
 
-1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
-2. Pick the `Ruthgyeul/Ruthgyeul` repo.
-3. Build settings:
-   - **Root directory:** `web`
-   - **Build command:** `npm run build`
-   - **Build output directory:** `out`
-   - **Environment variable:** `NODE_VERSION = 22`
-4. In the Pages project → **Custom domains**, add `ruthgyeul.xyz` (and
-   `www.ruthgyeul.xyz` if desired). If the domain's DNS is already on Cloudflare,
-   the records are created automatically.
+```ini
+[Service]
+Type=exec
+User=ruthgyeul
+WorkingDirectory=/home/ruthgyeul/Web/DefaultWeb/web
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=3
+```
 
-Every push to `main` then rebuilds and deploys; pull requests get preview URLs.
+> **Important:** `next start` needs a **server build**, not a static export.
+> `npm run build` must run and produce `.next/` before `npm run start`.
 
-### Option B — GitHub Actions (in-repo CI)
+### Update the deployed site
 
-A workflow is provided at
-[`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml). It builds `web/`
-and deploys `out/` to Cloudflare Pages via Wrangler. It needs two repo secrets:
+From the app directory on the server (`/home/ruthgyeul/Web/DefaultWeb/web`):
 
-- `CLOUDFLARE_API_TOKEN` — a token with the *Cloudflare Pages: Edit* permission.
-- `CLOUDFLARE_ACCOUNT_ID` — your account ID.
+```bash
+git pull
+npm ci
+npm run build
+sudo systemctl restart DefaultWeb
+```
 
-Create the Pages project once (named `ruthgyeul`) before the first run, either in
-the dashboard or with `npx wrangler pages project create ruthgyeul`.
+Check it came up cleanly:
+
+```bash
+sudo systemctl status DefaultWeb
+sudo journalctl -u DefaultWeb.service -n 50 --no-pager
+```
+
+The process listens on `PORT` (3000). Front it with your reverse proxy
+(nginx / Cloudflare) terminating TLS for `ruthgyeul.xyz` and proxying to
+`127.0.0.1:3000`. Only expose the proxy publicly — port 3000 does not need to be
+opened in the firewall.
+
+### CI
+
+[`.github/workflows/ci.yml`](../.github/workflows/ci.yml) lints, typechecks and
+builds `web/` on every push/PR that touches it, so `main` always builds. It does
+not deploy — deployment happens on the server with the steps above.
