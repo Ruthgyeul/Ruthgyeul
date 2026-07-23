@@ -1,0 +1,144 @@
+/*
+ * Global styles ported from the approved mockups.
+ * Colors mirror src/lib/theme.ts; the font family is injected by next/font
+ * (self-hosted IBM Plex Mono) via the --font-mono variable set on <html>.
+ */
+
+:root {
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0d13;
+  color: #e6e8ee;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: #38bdf8;
+}
+a:hover {
+  color: #7cd4fb;
+}
+
+::selection {
+  background: rgba(52, 211, 153, 0.3);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive: collapse the 12-col dashboard to a single column on small screens. */
+@media (max-width: 860px) {
+  .dash-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dash-grid > div {
+    grid-column: span 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0d13;
+}
+::-webkit-scrollbar-thumb {
+  background: #242b3a;
+  border-radius: 5px;
+  border: 2px solid #0a0d13;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #242b3a #0a0d13;
+}
+
+/* Card hover lift — applied to elements tagged with the .card class. */
+.card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(56, 189, 248, 0.35);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+/* Generic hover-accent helper for links/buttons that brighten on hover. */
+.hover-accent:hover {
+  border-color: #38bdf8 !important;
+  color: #38bdf8 !important;
+}
+.hover-soft:hover {
+  background: rgba(56, 189, 248, 0.08) !important;
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  * {
+    background: transparent !important;
+    color: #111 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  a {
+    text-decoration: underline !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
