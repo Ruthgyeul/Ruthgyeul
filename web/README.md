@@ -35,7 +35,7 @@ Other scripts:
 npm run build      # production build (.next)
 npm run start      # run the production server (next start) on $PORT (default 3000)
 npm run typecheck  # tsc --noEmit
-npm run lint       # next lint
+npm run lint       # eslint . (flat config, eslint.config.mjs)
 ```
 
 ## Project layout

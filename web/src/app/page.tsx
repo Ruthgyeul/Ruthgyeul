@@ -126,6 +126,18 @@ export default function Home() {
     }
   }, []);
 
+  const toggleLang = useCallback(() => {
+    setLang((prev) => {
+      const next = prev === "ko" ? "en" : "ko";
+      try {
+        localStorage.setItem(LANG_KEY, next);
+      } catch {
+        /* ignore */
+      }
+      return next;
+    });
+  }, []);
+
   // --- Keyboard: ⌘K / Ctrl-K palette, ⇧L language, ESC close -----------------
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -145,20 +157,7 @@ export default function Home() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paletteOpen]);
-
-  const toggleLang = useCallback(() => {
-    setLang((prev) => {
-      const next = prev === "ko" ? "en" : "ko";
-      try {
-        localStorage.setItem(LANG_KEY, next);
-      } catch {
-        /* ignore */
-      }
-      return next;
-    });
-  }, []);
+  }, [paletteOpen, toggleLang]);
 
   const scrollToId = useCallback((id: string) => {
     const el = document.getElementById(id);
@@ -210,9 +209,9 @@ export default function Home() {
       { label: L({ ko: "수상 로그로 이동", en: "Go to Awards" }), tag: "Nav", run: () => scrollToId("sec-awards") },
       { label: L({ ko: "연락처로 이동", en: "Go to Contact" }), tag: "Nav", run: () => scrollToId("sec-contact") },
       { label: L(labels.toggleLang), tag: "Action", run: () => { toggleLang(); setPaletteOpen(false); } },
-      { label: "GitHub — Ruthgyeul", tag: "Link", run: () => window.open(links.github, "_blank") },
-      { label: "LinkedIn — leejaeah", tag: "Link", run: () => window.open(links.linkedin, "_blank") },
-      { label: "Instagram — jae.__.ah", tag: "Link", run: () => window.open(links.instagram, "_blank") },
+      { label: "GitHub — Ruthgyeul", tag: "Link", run: () => window.open(links.github, "_blank", "noopener,noreferrer") },
+      { label: "LinkedIn — leejaeah", tag: "Link", run: () => window.open(links.linkedin, "_blank", "noopener,noreferrer") },
+      { label: "Instagram — jae.__.ah", tag: "Link", run: () => window.open(links.instagram, "_blank", "noopener,noreferrer") },
     ];
     const q = paletteQuery.toLowerCase();
     return all.filter((item) => item.label.toLowerCase().includes(q));

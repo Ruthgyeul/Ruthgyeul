@@ -2,25 +2,31 @@
   "name": "ruthgyeul-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Jaeah Lee — portfolio site (ruthgyeul.xyz)",
+  "description": "Jaeah Lee — portfolio web",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "^15.5.21",
+    "next": "^16.2.11",
     "react": "19.1.0",
     "react-dom": "19.1.0"
+  },
+  "//overrides": "Force patched transitive deps that Next still pins to vulnerable versions: postcss (GHSA-qx2v-qp2m-jg93, GHSA-6g55-p6wh-862q) and sharp/libvips (GHSA-f88m-g3jw-g9cj). Both are same-major, backward-compatible bumps. Revisit when a Next release ships the patched versions itself.",
+  "overrides": {
+    "postcss": "^8.5.22",
+    "sharp": "^0.35.3",
+    "@eslint/plugin-kit": "^0.3.4"
   },
   "devDependencies": {
     "@types/node": "22.14.0",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
     "eslint": "9.18.0",
-    "eslint-config-next": "^15.5.21",
+    "eslint-config-next": "^16.2.11",
     "typescript": "5.7.3"
   }
 }
