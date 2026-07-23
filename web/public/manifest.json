@@ -1,0 +1,61 @@
+{
+  "name": "Jaeah Lee — Full-Stack Developer",
+  "short_name": "Jaeah Lee",
+  "description": "이재아 / Jaeah Lee — Web3, blockchain and cloud full-stack developer. Inha University CSE.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#0a0d13",
+  "theme_color": "#0a0d13",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/64x64.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "portfolio",
+    "developer",
+    "productivity"
+  ],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "2940x1912",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Jaeah Lee — Full-Stack Developer portfolio"
+    }
+  ]
+}
