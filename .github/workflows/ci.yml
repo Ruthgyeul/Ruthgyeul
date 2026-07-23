@@ -17,6 +17,12 @@ on:
       - ".github/workflows/ci.yml"
   workflow_dispatch:
 
+# Least privilege: this job only reads the checked-out code — it never pushes,
+# comments or deploys. Restrict the automatic GITHUB_TOKEN accordingly so a
+# compromised dependency in CI cannot use it to write to the repo.
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
