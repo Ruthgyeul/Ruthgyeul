@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
 import { identity } from "@/lib/content";
+import {
+  aggregateLanguages,
+  buildGrid,
+  parseContributionsHtml,
+  type LangSlice,
+} from "@/lib/github";
 
 /**
  * Real GitHub data, proxied server-side.
@@ -9,14 +15,14 @@ import { identity } from "@/lib/content";
  * the live data first-party from GitHub, and hands the browser a small, shaped
  * JSON payload from the same origin.
  *
+ * All parsing / grid-building / language aggregation lives in `@/lib/github`
+ * (pure, unit-tested). This file is just the fetch + caching layer.
+ *
  * Two first-party, token-free upstreams:
  *   - Contribution calendar: GitHub's own `/users/<user>/contributions`
- *     fragment (the same HTML the profile page renders). GitHub does not expose
- *     the calendar via its public REST API and the GraphQL endpoint needs a
- *     personal token, so we parse this fragment. Each day is a `<td>` carrying
- *     `data-date` and `data-level`, with an accessible `<tool-tip>` giving the
- *     exact count.
- *   - Profile stats (repos / followers): GitHub REST API, unauthenticated.
+ *     fragment (the HTML the profile page renders). GitHub does not expose the
+ *     calendar via REST, and GraphQL needs a token — so we parse this fragment.
+ *   - Profile stats / repos / commits: GitHub REST API, unauthenticated.
  *
  * Responses are cached for an hour (`revalidate`) so we stay well under the
  * unauthenticated rate limits no matter how much traffic the page gets.
@@ -24,10 +30,13 @@ import { identity } from "@/lib/content";
 
 export const revalidate = 3600; // seconds
 
-const COLUMNS = 26; // weeks shown in the contribution grid
-const ROWS = 7; // days per week (Sun..Sat)
-const CELLS = COLUMNS * ROWS;
-const DAY_MS = 86_400_000;
+const REPO_LIMIT = 6;
+const RECENT_LIMIT = 3;
+
+const GH_HEADERS = {
+  accept: "application/vnd.github+json",
+  "user-agent": "ruthgyeul-portfolio",
+} as const;
 
 interface Repo {
   name: string;
@@ -50,6 +59,10 @@ interface GithubPayload {
   ok: boolean;
   /** Heat levels (0..4) in row-major order (row = weekday, 26 columns). */
   cells: number[];
+  /** Exact contribution counts aligned to `cells`. */
+  counts: number[];
+  /** ISO date per cell aligned to `cells` ("" for future/blank cells). */
+  dates: string[];
   /** Month number labels aligned to the 26 columns ("" when unchanged). */
   monthLabels: string[];
   /** Contributions in the last year (as GitHub reports it). */
@@ -60,35 +73,14 @@ interface GithubPayload {
   followers: number | null;
   /** Top owned (non-fork) repositories, most notable first. */
   repos: Repo[];
+  /** Primary-language distribution across owned repos. */
+  languages: LangSlice[];
   /** Most recently pushed repos with their latest commit — real git activity. */
   recent: RecentActivity[];
   updatedAt: string;
 }
 
-const REPO_LIMIT = 6;
-const RECENT_LIMIT = 3;
-
-const GH_HEADERS = {
-  accept: "application/vnd.github+json",
-  "user-agent": "ruthgyeul-portfolio",
-} as const;
-
-/** UTC date key (YYYY-MM-DD) for a Date. */
-const dateKey = (d: Date): string => d.toISOString().slice(0, 10);
-
-const attr = (tag: string, name: string): string | null => {
-  const m = tag.match(new RegExp(`\\b${name}="([^"]*)"`));
-  return m ? m[1] : null;
-};
-
-/**
- * Parse GitHub's contribution-calendar HTML fragment into per-day levels and
- * exact counts, keyed by ISO date.
- */
-async function fetchContributions(): Promise<{
-  levelByDate: Map<string, number>;
-  countByDate: Map<string, number>;
-}> {
+async function fetchContributions() {
   const res = await fetch(
     `https://github.com/users/${identity.githubHandle}/contributions`,
     {
@@ -101,33 +93,7 @@ async function fetchContributions(): Promise<{
     },
   );
   if (!res.ok) throw new Error(`contributions upstream ${res.status}`);
-  const html = await res.text();
-
-  const levelByDate = new Map<string, number>();
-  const countByDate = new Map<string, number>();
-  const idToDate = new Map<string, string>();
-
-  // Day cells: <td ... data-date="YYYY-MM-DD" ... data-level="N" id="..." ...>
-  const tdRe = /<td\b[^>]*\bdata-date="[^"]*"[^>]*>/g;
-  for (const [tag] of html.matchAll(tdRe)) {
-    const date = attr(tag, "data-date");
-    if (!date) continue;
-    const level = Number(attr(tag, "data-level") ?? "0");
-    levelByDate.set(date, Number.isFinite(level) ? level : 0);
-    const id = attr(tag, "id");
-    if (id) idToDate.set(id, date);
-  }
-
-  // Tooltips carry the exact count: "No contributions on ..." or "N contributions on ...".
-  const tipRe = /<tool-tip\b[^>]*\bfor="([^"]+)"[^>]*>([^<]*)<\/tool-tip>/g;
-  for (const [, forId, text] of html.matchAll(tipRe)) {
-    const date = idToDate.get(forId);
-    if (!date) continue;
-    const num = text.trim().match(/^([\d,]+)\s+contribution/i);
-    countByDate.set(date, num ? Number(num[1].replace(/,/g, "")) : 0);
-  }
-
-  return { levelByDate, countByDate };
+  return parseContributionsHtml(await res.text());
 }
 
 async function fetchProfile(): Promise<{ publicRepos: number | null; followers: number | null }> {
@@ -176,18 +142,22 @@ async function fetchLatestCommit(repo: string): Promise<{ message: string; date:
 }
 
 /**
- * Owned (non-fork) repos, shaped two ways: the most notable by stars for the
- * repo showcase, and the most recently pushed (with their latest commit) for
- * the live "in progress" activity feed. The special profile repo (named after
- * the account) is skipped — it only holds the profile README.
+ * Owned (non-fork) repos, shaped three ways: the most notable by stars for the
+ * repo showcase, a primary-language distribution, and the most recently pushed
+ * (with their latest commit) for the live "in progress" activity feed. The
+ * special profile repo (named after the account) is skipped.
  */
-async function fetchRepos(): Promise<{ repos: Repo[]; recent: RecentActivity[] }> {
+async function fetchRepos(): Promise<{
+  repos: Repo[];
+  languages: LangSlice[];
+  recent: RecentActivity[];
+}> {
   try {
     const res = await fetch(
       `https://api.github.com/users/${identity.githubHandle}/repos?per_page=100&sort=pushed`,
       { next: { revalidate }, headers: GH_HEADERS },
     );
-    if (!res.ok) return { repos: [], recent: [] };
+    if (!res.ok) return { repos: [], languages: [], recent: [] };
     const raw = (await res.json()) as RawRepo[];
     const owned = raw.filter((r) => !r.fork && r.name !== identity.githubHandle);
 
@@ -207,6 +177,8 @@ async function fetchRepos(): Promise<{ repos: Repo[]; recent: RecentActivity[] }
         pushedAt: r.pushed_at,
       }));
 
+    const languages = aggregateLanguages(owned.map((r) => r.language));
+
     // `owned` is already newest-pushed first (sort=pushed).
     const recentRepos = owned.slice(0, RECENT_LIMIT);
     const commits = await Promise.all(recentRepos.map((r) => fetchLatestCommit(r.name)));
@@ -218,48 +190,10 @@ async function fetchRepos(): Promise<{ repos: Repo[]; recent: RecentActivity[] }
       url: r.html_url,
     }));
 
-    return { repos, recent };
+    return { repos, languages, recent };
   } catch {
-    return { repos: [], recent: [] };
+    return { repos: [], languages: [], recent: [] };
   }
-}
-
-/**
- * Arrange the per-day maps into the grid the UI draws: 26 columns (weeks,
- * Sunday-aligned, newest on the right) × 7 rows (weekday), flattened row-major
- * so the client can map index → shade directly.
- */
-function buildGrid(
-  levelByDate: Map<string, number>,
-  countByDate: Map<string, number>,
-): { cells: number[]; monthLabels: string[]; windowTotal: number } {
-  // Sunday that opens the current (rightmost) week, in UTC.
-  const today = new Date(`${dateKey(new Date())}T00:00:00Z`);
-  const currentWeekSunday = new Date(today.getTime() - today.getUTCDay() * DAY_MS);
-
-  const cells = new Array<number>(CELLS).fill(0);
-  const monthLabels = new Array<string>(COLUMNS).fill("");
-  const todayKey = dateKey(today);
-  let windowTotal = 0;
-  let lastMonth = -1;
-
-  for (let col = 0; col < COLUMNS; col++) {
-    const weeksAgo = COLUMNS - 1 - col;
-    const columnSunday = new Date(currentWeekSunday.getTime() - weeksAgo * 7 * DAY_MS);
-
-    const month = columnSunday.getUTCMonth();
-    monthLabels[col] = month !== lastMonth ? String(month + 1) : "";
-    lastMonth = month;
-
-    for (let row = 0; row < ROWS; row++) {
-      const key = dateKey(new Date(columnSunday.getTime() + row * DAY_MS));
-      if (key > todayKey) continue; // future days stay empty
-      cells[row * COLUMNS + col] = levelByDate.get(key) ?? 0;
-      windowTotal += countByDate.get(key) ?? 0;
-    }
-  }
-
-  return { cells, monthLabels, windowTotal };
 }
 
 export async function GET() {
@@ -269,19 +203,26 @@ export async function GET() {
       fetchProfile(),
       fetchRepos(),
     ]);
-    const { cells, monthLabels, windowTotal } = buildGrid(levelByDate, countByDate);
+    const { cells, counts, dates, monthLabels, windowTotal } = buildGrid(
+      levelByDate,
+      countByDate,
+      new Date(),
+    );
     let totalLastYear = 0;
     for (const c of countByDate.values()) totalLastYear += c;
 
     const payload: GithubPayload = {
       ok: true,
       cells,
+      counts,
+      dates,
       monthLabels,
       totalLastYear,
       windowTotal,
       publicRepos: profile.publicRepos,
       followers: profile.followers,
       repos: repoData.repos,
+      languages: repoData.languages,
       recent: repoData.recent,
       updatedAt: new Date().toISOString(),
     };
@@ -291,12 +232,15 @@ export async function GET() {
     const empty: GithubPayload = {
       ok: false,
       cells: [],
+      counts: [],
+      dates: [],
       monthLabels: [],
       totalLastYear: 0,
       windowTotal: 0,
       publicRepos: null,
       followers: null,
       repos: [],
+      languages: [],
       recent: [],
       updatedAt: new Date().toISOString(),
     };

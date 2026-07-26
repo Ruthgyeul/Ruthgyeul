@@ -9,6 +9,7 @@ import {
   awards,
   bio,
   bootLines,
+  contribTitle,
   education,
   experience,
   identity,
@@ -46,15 +47,24 @@ interface GithubActivity {
   url: string;
 }
 
+interface GithubLang {
+  name: string;
+  count: number;
+  pct: number;
+}
+
 interface GithubData {
   ok: boolean;
   cells: number[];
+  counts: number[];
+  dates: string[];
   monthLabels: string[];
   totalLastYear: number;
   windowTotal: number;
   publicRepos: number | null;
   followers: number | null;
   repos: GithubRepo[];
+  languages: GithubLang[];
   recent: GithubActivity[];
   updatedAt: string;
 }
@@ -744,7 +754,11 @@ export default function Home() {
                       : contribCells.map((bg, i) => (
                           <div
                             key={i}
-                            title={L(labels.githubLive)}
+                            title={
+                              github
+                                ? contribTitle(github.dates[i] ?? "", github.counts[i] ?? 0, lang)
+                                : L(labels.githubLive)
+                            }
                             style={{ width: "100%", paddingBottom: "100%", borderRadius: 2, background: bg }}
                           />
                         ))}
@@ -907,6 +921,9 @@ export default function Home() {
                     {L(labels.reposLive)}
                   </span>
                 </div>
+                {github.languages.length > 0 && (
+                  <LanguageBar languages={github.languages} label={L(labels.languages)} />
+                )}
                 <div
                   style={{
                     display: "grid",
@@ -1085,6 +1102,55 @@ function TagRow({
           {item}
         </span>
       ))}
+    </div>
+  );
+}
+
+function LanguageBar({ languages, label }: { languages: GithubLang[]; label: string }) {
+  const colorFor = (name: string) => (name === "Other" ? color.faint : languageColor(name));
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <div
+        style={{
+          fontSize: 11,
+          color: color.muted,
+          textTransform: "uppercase",
+          letterSpacing: ".05em",
+          marginBottom: 8,
+        }}
+      >
+        {label}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          height: 8,
+          borderRadius: 999,
+          overflow: "hidden",
+          background: color.cardInset,
+        }}
+      >
+        {languages.map((lng) => (
+          <div
+            key={lng.name}
+            title={`${lng.name} · ${lng.pct}%`}
+            style={{ width: `${lng.pct}%`, background: colorFor(lng.name) }}
+          />
+        ))}
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: 10 }}>
+        {languages.map((lng) => (
+          <span
+            key={lng.name}
+            style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: color.textDim }}
+          >
+            <span style={{ width: 9, height: 9, borderRadius: 999, background: colorFor(lng.name) }} />
+            {lng.name}
+            <span style={{ color: color.faint }}>{lng.pct}%</span>
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
