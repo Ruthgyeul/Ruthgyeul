@@ -1,15 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { ErrorScreen } from "@/components/ErrorScreen";
 import { color } from "@/lib/theme";
 
+const subscribe = () => () => {}; // the path never changes for a given render
+
 export default function NotFound() {
-  // Reflect the actual requested path once we're on the client.
-  const [path, setPath] = useState("/unknown");
-  useEffect(() => {
-    setPath(window.location.pathname || "/unknown");
-  }, []);
+  // Reflect the actual requested path on the client; "/unknown" during SSR.
+  const path = useSyncExternalStore(
+    subscribe,
+    () => window.location.pathname || "/unknown",
+    () => "/unknown",
+  );
 
   return (
     <ErrorScreen

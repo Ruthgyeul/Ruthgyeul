@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BootScreen } from "@/components/BootScreen";
 import { CommandPalette, type PaletteItem } from "@/components/CommandPalette";
 import { TerminalBar } from "@/components/TerminalBar";
-import { color, contribShades } from "@/lib/theme";
+import { color, contribShades, languageColor } from "@/lib/theme";
 import {
   awards,
   bio,
@@ -28,13 +28,43 @@ const LANG_KEY = "portfolio-lang-dash";
 const TYPE_SPEED_MS = 22;
 const BOOT_STEP_MS = 400;
 
+/** Shape returned by the /api/github route (see src/app/api/github/route.ts). */
+interface GithubRepo {
+  name: string;
+  description: string | null;
+  language: string | null;
+  stars: number;
+  url: string;
+  pushedAt: string;
+}
+
+interface GithubActivity {
+  repo: string;
+  branch: string;
+  message: string;
+  date: string;
+  url: string;
+}
+
+interface GithubData {
+  ok: boolean;
+  cells: number[];
+  monthLabels: string[];
+  totalLastYear: number;
+  windowTotal: number;
+  publicRepos: number | null;
+  followers: number | null;
+  repos: GithubRepo[];
+  recent: GithubActivity[];
+  updatedAt: string;
+}
+
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Home() {
   // Language: start with a deterministic default for SSR, then reconcile with
   // the visitor's saved/browser preference after mount to avoid hydration drift.
   const [lang, setLang] = useState<Lang>("en");
-  const [mounted, setMounted] = useState(false);
 
   const [now, setNow] = useState<Date | null>(null);
   const [typedLen, setTypedLen] = useState(0);
@@ -52,31 +82,61 @@ export default function Home() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [paletteQuery, setPaletteQuery] = useState("");
 
+  const [github, setGithub] = useState<GithubData | null>(null);
+  const [ghStatus, setGhStatus] = useState<"loading" | "ready" | "error">("loading");
+
   const isKo = lang === "ko";
   const L = useCallback((text: { ko: string; en: string }) => text[lang], [lang]);
 
   // --- Mount: resolve language preference ------------------------------------
+  // The store update is queued as a microtask so it lands after the effect
+  // (never synchronously in the effect body), which keeps the initial paint in
+  // sync with the server-rendered "en" default before reconciling.
   useEffect(() => {
-    setMounted(true);
-    try {
-      const saved = localStorage.getItem(LANG_KEY);
-      if (saved === "ko" || saved === "en") setLang(saved);
-      else if ((navigator.language || "").toLowerCase().startsWith("ko")) setLang("ko");
-    } catch {
-      /* localStorage unavailable — keep default */
-    }
+    queueMicrotask(() => {
+      try {
+        const saved = localStorage.getItem(LANG_KEY);
+        if (saved === "ko" || saved === "en") setLang(saved);
+        else if ((navigator.language || "").toLowerCase().startsWith("ko")) setLang("ko");
+      } catch {
+        /* localStorage unavailable — keep default */
+      }
+    });
+  }, []);
+
+  // --- Live GitHub data (proxied server-side; see /api/github) ---------------
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/github")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: GithubData | null) => {
+        if (!alive) return;
+        if (d && d.ok && d.cells.length === 182) {
+          setGithub(d);
+          setGhStatus("ready");
+        } else {
+          setGhStatus("error"); // upstream returned, but not usable
+        }
+      })
+      .catch(() => {
+        // offline / upstream down — fall back to the generated grid
+        if (alive) setGhStatus("error");
+      });
+    return () => {
+      alive = false;
+    };
   }, []);
 
   // --- Clock -----------------------------------------------------------------
   useEffect(() => {
-    setNow(new Date());
+    queueMicrotask(() => setNow(new Date())); // first tick off the sync effect path
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
 
   // --- Typing animation (restarts when language changes) ---------------------
   useEffect(() => {
-    setTypedLen(0);
+    queueMicrotask(() => setTypedLen(0)); // reset off the sync effect path
     const full = whoami[lang];
     const id = setInterval(() => {
       setTypedLen((prev) => {
@@ -174,14 +234,17 @@ export default function Home() {
     ? `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())}`
     : "";
 
-  const contribCells = useMemo(
-    () =>
-      Array.from({ length: 182 }, (_, i) => {
-        const level = (((i * 7) % 11) + (i % 5) * 2) % 5;
-        return contribShades[level];
-      }),
-    [],
-  );
+  // Live contribution heat when the API has answered; otherwise a deterministic
+  // placeholder grid so the card is never empty (offline, first paint, etc.).
+  const contribCells = useMemo(() => {
+    if (github) {
+      return github.cells.map((level) => contribShades[level] ?? contribShades[0]);
+    }
+    return Array.from({ length: 182 }, (_, i) => {
+      const level = (((i * 7) % 11) + (i % 5) * 2) % 5;
+      return contribShades[level];
+    });
+  }, [github]);
 
   const { weekdayLabels, monthLabels } = useMemo(() => {
     const base = now ?? new Date(0);
@@ -189,6 +252,9 @@ export default function Home() {
     const weekdayLabels = [0, 1, 2, 3, 4, 5, 6].map((r) =>
       r === 1 || r === 3 || r === 5 ? days[r] : "",
     );
+    if (github && github.monthLabels.length === 26) {
+      return { weekdayLabels, monthLabels: github.monthLabels };
+    }
     const monthLabels: string[] = [];
     let lastMonth = -1;
     for (let col = 0; col < 26; col++) {
@@ -199,13 +265,14 @@ export default function Home() {
       lastMonth = m;
     }
     return { weekdayLabels, monthLabels };
-  }, [now, lang]);
+  }, [now, lang, github]);
 
   const paletteItems: PaletteItem[] = useMemo(() => {
     const all: PaletteItem[] = [
       { label: L({ ko: "스킬로 이동", en: "Go to Skills" }), tag: "Nav", run: () => scrollToId("sec-skills") },
       { label: L({ ko: "학력으로 이동", en: "Go to Education" }), tag: "Nav", run: () => scrollToId("sec-education") },
       { label: L({ ko: "경력으로 이동", en: "Go to Experience" }), tag: "Nav", run: () => scrollToId("sec-experience") },
+      { label: L({ ko: "저장소로 이동", en: "Go to Repositories" }), tag: "Nav", run: () => scrollToId("sec-repos") },
       { label: L({ ko: "수상 로그로 이동", en: "Go to Awards" }), tag: "Nav", run: () => scrollToId("sec-awards") },
       { label: L({ ko: "연락처로 이동", en: "Go to Contact" }), tag: "Nav", run: () => scrollToId("sec-contact") },
       { label: L(labels.toggleLang), tag: "Action", run: () => { toggleLang(); setPaletteOpen(false); } },
@@ -580,7 +647,51 @@ export default function Home() {
 
             {/* GitHub contributions */}
             <Card style={{ gridColumn: "span 5" }} delay={0.25}>
-              <SectionLabel>GitHub</SectionLabel>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: 14,
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    fontSize: 12,
+                    color: color.muted,
+                    textTransform: "uppercase",
+                    letterSpacing: ".06em",
+                  }}
+                >
+                  <span style={{ color: color.faint, fontWeight: 600 }}>{"//"}</span>
+                  GitHub
+                </div>
+                {github && (
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontSize: 11,
+                      color: color.green,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: 999,
+                        background: color.green,
+                        animation: "pulse 2s ease-in-out infinite",
+                      }}
+                    />
+                    {github.totalLastYear} {L(labels.githubContribs)}
+                  </span>
+                )}
+              </div>
               <div style={{ display: "flex", gap: 5 }}>
                 <div
                   style={{
@@ -615,16 +726,56 @@ export default function Home() {
                     ))}
                   </div>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(26,1fr)", gap: 3 }}>
-                    {contribCells.map((bg, i) => (
-                      <div
-                        key={i}
-                        title={L(labels.githubLive)}
-                        style={{ width: "100%", paddingBottom: "100%", borderRadius: 2, background: bg }}
-                      />
-                    ))}
+                    {ghStatus === "loading"
+                      ? Array.from({ length: 182 }, (_, i) => (
+                          <div
+                            key={i}
+                            aria-hidden
+                            style={{
+                              width: "100%",
+                              paddingBottom: "100%",
+                              borderRadius: 2,
+                              background: color.cardInset,
+                              animation: "pulse 1.4s ease-in-out infinite",
+                              animationDelay: `${(i % 26) * 0.03}s`,
+                            }}
+                          />
+                        ))
+                      : contribCells.map((bg, i) => (
+                          <div
+                            key={i}
+                            title={L(labels.githubLive)}
+                            style={{ width: "100%", paddingBottom: "100%", borderRadius: 2, background: bg }}
+                          />
+                        ))}
                   </div>
                 </div>
               </div>
+              {github && (github.publicRepos !== null || github.followers !== null) && (
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 16,
+                    flexWrap: "wrap",
+                    marginTop: 12,
+                    fontSize: 12,
+                    color: color.muted,
+                  }}
+                >
+                  {github.publicRepos !== null && (
+                    <span>
+                      <span style={{ color: color.text, fontWeight: 600 }}>{github.publicRepos}</span>{" "}
+                      {L(labels.githubRepos)}
+                    </span>
+                  )}
+                  {github.followers !== null && (
+                    <span>
+                      <span style={{ color: color.text, fontWeight: 600 }}>{github.followers}</span>{" "}
+                      {L(labels.githubFollowers)}
+                    </span>
+                  )}
+                </div>
+              )}
               <div style={{ fontSize: 12, color: color.muted, lineHeight: 1.6, marginTop: 10 }}>
                 {L(labels.githubNote)}{" "}
                 <a href={links.github} target="_blank" rel="noopener noreferrer">
@@ -633,28 +784,142 @@ export default function Home() {
               </div>
             </Card>
 
-            {/* In progress */}
+            {/* In progress — real recent commits when available */}
             <Card style={{ gridColumn: "span 4" }} delay={0.3}>
               <SectionLabel>{L(labels.inProgress)}</SectionLabel>
-              <div style={{ fontSize: 12.5, lineHeight: 1.95, color: color.muted }}>
-                <div>
-                  On branch <span style={{ color: color.accentSoft }}>main</span>
+              {github && github.recent.length > 0 ? (
+                <div style={{ fontSize: 12.5, lineHeight: 1.7, color: color.muted }}>
+                  <div>
+                    On branch <span style={{ color: color.accentSoft }}>main</span>
+                  </div>
+                  <div style={{ marginTop: 6, color: color.textDim }}>{L(labels.recentActivity)}:</div>
+                  {github.recent.map((a, i) => (
+                    <div key={i} style={{ marginTop: 9 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                        <span style={{ color: color.green }}>●</span>
+                        <a
+                          href={a.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover-accent"
+                          style={{ color: color.text, textDecoration: "none" }}
+                        >
+                          {a.repo}
+                        </a>
+                        <span
+                          style={{
+                            fontSize: 10,
+                            padding: "1px 5px",
+                            border: `1px solid ${color.border}`,
+                            borderRadius: 3,
+                            color: color.faint,
+                          }}
+                        >
+                          {a.branch}
+                        </span>
+                        <span style={{ marginLeft: "auto", fontSize: 11, color: color.faint }}>{a.date}</span>
+                      </div>
+                      {a.message && (
+                        <div
+                          style={{
+                            color: color.muted,
+                            paddingLeft: 14,
+                            marginTop: 2,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                          title={a.message}
+                        >
+                          {a.message}
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-                <div style={{ marginTop: 6, color: color.textDim }}>{L(labels.changes)}</div>
-                <div>
-                  <span style={{ color: color.yellow }}>modified:</span> Arbitrum Ambassador{" "}
-                  <span style={{ color: color.green }}>(ongoing)</span>
+              ) : (
+                <div style={{ fontSize: 12.5, lineHeight: 1.95, color: color.muted }}>
+                  <div>
+                    On branch <span style={{ color: color.accentSoft }}>main</span>
+                  </div>
+                  <div style={{ marginTop: 6, color: color.textDim }}>{L(labels.changes)}</div>
+                  <div>
+                    <span style={{ color: color.yellow }}>modified:</span> Arbitrum Ambassador{" "}
+                    <span style={{ color: color.green }}>(ongoing)</span>
+                  </div>
+                  <div>
+                    <span style={{ color: color.yellow }}>modified:</span> Hyperbolic Ambassador{" "}
+                    <span style={{ color: color.green }}>(ongoing)</span>
+                  </div>
+                  <div>
+                    <span style={{ color: color.accent }}>new file:</span> Blockchain Valley 6th{" "}
+                    <span style={{ color: color.muted }}>— Senior</span>
+                  </div>
                 </div>
-                <div>
-                  <span style={{ color: color.yellow }}>modified:</span> Hyperbolic Ambassador{" "}
-                  <span style={{ color: color.green }}>(ongoing)</span>
-                </div>
-                <div>
-                  <span style={{ color: color.accent }}>new file:</span> Blockchain Valley 6th{" "}
-                  <span style={{ color: color.muted }}>— Senior</span>
-                </div>
-              </div>
+              )}
             </Card>
+
+            {/* Repositories — live from GitHub */}
+            {github && github.repos.length > 0 && (
+              <Card id="sec-repos" style={{ gridColumn: "span 12" }} delay={0.33}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 14,
+                    flexWrap: "wrap",
+                    gap: 8,
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontSize: 12,
+                      color: color.muted,
+                      textTransform: "uppercase",
+                      letterSpacing: ".06em",
+                    }}
+                  >
+                    <span style={{ color: color.faint, fontWeight: 600 }}>{"//"}</span>
+                    {L(labels.repositories)}
+                  </div>
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontSize: 11,
+                      color: color.green,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: 999,
+                        background: color.green,
+                        animation: "pulse 2s ease-in-out infinite",
+                      }}
+                    />
+                    {L(labels.reposLive)}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+                    gap: 12,
+                  }}
+                >
+                  {github.repos.map((repo) => (
+                    <RepoTile key={repo.name} repo={repo} />
+                  ))}
+                </div>
+              </Card>
+            )}
 
             {/* Experience */}
             <Card id="sec-experience" style={{ gridColumn: "span 9" }} delay={0.35}>
@@ -821,6 +1086,56 @@ function TagRow({
         </span>
       ))}
     </div>
+  );
+}
+
+function RepoTile({ repo }: { repo: GithubRepo }) {
+  return (
+    <a
+      href={repo.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="repo-tile"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 8,
+        background: color.cardInset,
+        border: `1px solid ${color.borderSoft}`,
+        borderRadius: 6,
+        padding: "12px 14px",
+        textDecoration: "none",
+        minHeight: 104,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill={color.muted} aria-hidden>
+          <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z" />
+        </svg>
+        <span style={{ color: color.text, fontWeight: 600, fontSize: 13, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {repo.name}
+        </span>
+      </div>
+      <div className="clamp-2" style={{ fontSize: 12, color: color.muted, lineHeight: 1.5, flex: 1 }}>
+        {repo.description || "—"}
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 11.5, color: color.faint }}>
+        {repo.language && (
+          <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <span
+              style={{
+                width: 9,
+                height: 9,
+                borderRadius: 999,
+                background: languageColor(repo.language),
+              }}
+            />
+            {repo.language}
+          </span>
+        )}
+        <span>★ {repo.stars}</span>
+      </div>
+    </a>
   );
 }
 
