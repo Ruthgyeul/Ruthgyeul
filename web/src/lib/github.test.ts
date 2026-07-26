@@ -5,6 +5,7 @@ import {
   buildGrid,
   CELLS,
   COLUMNS,
+  computeStreaks,
   parseContributionsHtml,
 } from "./github";
 
@@ -96,6 +97,59 @@ describe("buildGrid", () => {
     ]);
     const grid = buildGrid(new Map(), count, now);
     expect(grid.windowTotal).toBe(5);
+  });
+});
+
+describe("computeStreaks", () => {
+  const now = new Date("2026-07-10T12:00:00Z");
+  const map = (entries: Array<[string, number]>) => new Map<string, number>(entries);
+
+  it("counts a current streak ending today", () => {
+    const counts = map([
+      ["2026-07-08", 2],
+      ["2026-07-09", 1],
+      ["2026-07-10", 3], // today
+    ]);
+    expect(computeStreaks(counts, now).current).toBe(3);
+  });
+
+  it("still counts the streak when today has no contributions yet", () => {
+    const counts = map([
+      ["2026-07-08", 2],
+      ["2026-07-09", 1],
+      ["2026-07-10", 0], // today, empty
+    ]);
+    // Streak runs through yesterday.
+    expect(computeStreaks(counts, now).current).toBe(2);
+  });
+
+  it("breaks the current streak on a gap day", () => {
+    const counts = map([
+      ["2026-07-07", 5],
+      ["2026-07-08", 0], // gap
+      ["2026-07-09", 1],
+      ["2026-07-10", 1],
+    ]);
+    expect(computeStreaks(counts, now).current).toBe(2);
+  });
+
+  it("finds the longest run across the whole series", () => {
+    const counts = map([
+      ["2026-06-01", 1],
+      ["2026-06-02", 1],
+      ["2026-06-03", 1],
+      ["2026-06-04", 1], // run of 4
+      ["2026-06-05", 0],
+      ["2026-07-09", 1],
+      ["2026-07-10", 1], // run of 2 (current)
+    ]);
+    const s = computeStreaks(counts, now);
+    expect(s.longest).toBe(4);
+    expect(s.current).toBe(2);
+  });
+
+  it("returns zeros for an empty map", () => {
+    expect(computeStreaks(new Map(), now)).toEqual({ current: 0, longest: 0 });
   });
 });
 
