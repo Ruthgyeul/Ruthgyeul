@@ -218,6 +218,7 @@ export const labels = {
   reposLive: { ko: "GitHub에서 실시간", en: "Live from GitHub" },
   recentActivity: { ko: "최근 활동", en: "Recent Activity" },
   onBranch: { ko: "브랜치", en: "on branch" },
+  languages: { ko: "주력 언어", en: "Languages" },
   fullStack: { ko: "풀스택 개발자", en: "Full-Stack Developer" },
   university: { ko: "인하대학교", en: "Inha University" },
   palettePlaceholder: {
@@ -231,4 +232,28 @@ export const labels = {
 export const weekdayShort: Record<Lang, string[]> = {
   ko: ["일", "월", "화", "수", "목", "금", "토"],
   en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+};
+
+/** Short month names, used to format contribution-cell tooltips. */
+export const monthShort: Record<Lang, string[]> = {
+  ko: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+};
+
+/**
+ * Human-readable tooltip for one contribution cell, e.g.
+ * "3 contributions on Jul 10" / "7월 10일 · 3 기여".
+ */
+export const contribTitle = (
+  date: string,
+  count: number,
+  lang: Lang,
+): string => {
+  if (!date) return "";
+  const [, m, d] = date.split("-").map(Number);
+  const md = lang === "ko" ? `${m}월 ${d}일` : `${monthShort.en[m - 1]} ${d}`;
+  if (count <= 0) return lang === "ko" ? `${md} · 기여 없음` : `No contributions on ${md}`;
+  return lang === "ko"
+    ? `${md} · ${count} 기여`
+    : `${count} contribution${count > 1 ? "s" : ""} on ${md}`;
 };
