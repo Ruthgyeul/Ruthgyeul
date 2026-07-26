@@ -34,3 +34,26 @@ export const contribShades = [
   "#26a641",
   "#39d353",
 ] as const;
+
+/** GitHub's canonical per-language dot colors (subset we actually ship). */
+export const langColor: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  Python: "#3572a5",
+  Java: "#b07219",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  C: "#555555",
+  "C++": "#f34b7d",
+  Solidity: "#aa6746",
+  Shell: "#89e051",
+  Go: "#00add8",
+  Rust: "#dea584",
+  Dockerfile: "#384d54",
+  Vue: "#41b883",
+  Svelte: "#ff3e00",
+};
+
+/** Dot color for a repo language, with a neutral fallback for unknowns. */
+export const languageColor = (lang: string | null): string =>
+  (lang && langColor[lang]) || "#8b93a7";

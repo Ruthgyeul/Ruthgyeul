@@ -211,6 +211,13 @@ export const labels = {
   copyright: { ko: "© 2026 이재아", en: "© 2026 Jaeah Lee" },
   githubNote: { ko: "실시간 커밋 활동은", en: "Live commit activity on" },
   githubLive: { ko: "실시간은 GitHub에서 확인", en: "Live activity on GitHub" },
+  githubContribs: { ko: "지난 1년 기여", en: "contributions in the last year" },
+  githubRepos: { ko: "공개 저장소", en: "public repos" },
+  githubFollowers: { ko: "팔로워", en: "followers" },
+  repositories: { ko: "저장소", en: "Repositories" },
+  reposLive: { ko: "GitHub에서 실시간", en: "Live from GitHub" },
+  recentActivity: { ko: "최근 활동", en: "Recent Activity" },
+  onBranch: { ko: "브랜치", en: "on branch" },
   fullStack: { ko: "풀스택 개발자", en: "Full-Stack Developer" },
   university: { ko: "인하대학교", en: "Inha University" },
   palettePlaceholder: {
