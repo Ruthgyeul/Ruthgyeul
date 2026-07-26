@@ -17,6 +17,7 @@ import {
   learning,
   links,
   mainSkills,
+  relativeTime,
   statusLine,
   t,
   tools,
@@ -37,6 +38,7 @@ interface GithubRepo {
   stars: number;
   url: string;
   pushedAt: string;
+  archived: boolean;
 }
 
 interface GithubActivity {
@@ -63,6 +65,9 @@ interface GithubData {
   windowTotal: number;
   publicRepos: number | null;
   followers: number | null;
+  totalStars: number;
+  currentStreak: number;
+  longestStreak: number;
   repos: GithubRepo[];
   languages: GithubLang[];
   recent: GithubActivity[];
@@ -70,6 +75,41 @@ interface GithubData {
 }
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+/**
+ * Animate an integer from 0 up to `target` once, on mount. Honors
+ * prefers-reduced-motion (jumps straight to the value). setState only ever
+ * happens inside rAF / a microtask, never synchronously in the effect body.
+ */
+function useCountUp(target: number, duration = 900): number {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || target <= 0) {
+      queueMicrotask(() => setValue(target));
+      return;
+    }
+    let raf = 0;
+    let startTs = 0;
+    const step = (ts: number) => {
+      if (!startTs) startTs = ts;
+      const p = Math.min(1, (ts - startTs) / duration);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      setValue(Math.round(target * eased));
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+  return value;
+}
+
+/** Renders a number that counts up to `value` when it first appears. */
+function CountUp({ value }: { value: number }) {
+  return <>{useCountUp(value)}</>;
+}
 
 export default function Home() {
   // Language: start with a deterministic default for SSR, then reconcile with
@@ -698,12 +738,13 @@ export default function Home() {
                         animation: "pulse 2s ease-in-out infinite",
                       }}
                     />
-                    {github.totalLastYear} {L(labels.githubContribs)}
+                    <CountUp value={github.totalLastYear} /> {L(labels.githubContribs)}
                   </span>
                 )}
               </div>
               <div style={{ display: "flex", gap: 5 }}>
                 <div
+                  aria-hidden
                   style={{
                     display: "grid",
                     gridTemplateRows: "repeat(7,1fr)",
@@ -721,6 +762,7 @@ export default function Home() {
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
+                    aria-hidden
                     style={{
                       display: "grid",
                       gridTemplateColumns: "repeat(26,1fr)",
@@ -735,7 +777,15 @@ export default function Home() {
                       <div key={i}>{m}</div>
                     ))}
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(26,1fr)", gap: 3 }}>
+                  <div
+                    role="img"
+                    aria-label={
+                      github
+                        ? `GitHub contribution graph — ${github.totalLastYear} contributions in the last year`
+                        : "GitHub contribution graph"
+                    }
+                    style={{ display: "grid", gridTemplateColumns: "repeat(26,1fr)", gap: 3 }}
+                  >
                     {ghStatus === "loading"
                       ? Array.from({ length: 182 }, (_, i) => (
                           <div
@@ -754,6 +804,7 @@ export default function Home() {
                       : contribCells.map((bg, i) => (
                           <div
                             key={i}
+                            aria-hidden
                             title={
                               github
                                 ? contribTitle(github.dates[i] ?? "", github.counts[i] ?? 0, lang)
@@ -765,11 +816,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              {github && (github.publicRepos !== null || github.followers !== null) && (
+              {github && (
                 <div
                   style={{
                     display: "flex",
-                    gap: 16,
+                    gap: "6px 16px",
                     flexWrap: "wrap",
                     marginTop: 12,
                     fontSize: 12,
@@ -778,16 +829,55 @@ export default function Home() {
                 >
                   {github.publicRepos !== null && (
                     <span>
-                      <span style={{ color: color.text, fontWeight: 600 }}>{github.publicRepos}</span>{" "}
+                      <b style={{ color: color.text, fontWeight: 600 }}>
+                        <CountUp value={github.publicRepos} />
+                      </b>{" "}
                       {L(labels.githubRepos)}
                     </span>
                   )}
                   {github.followers !== null && (
                     <span>
-                      <span style={{ color: color.text, fontWeight: 600 }}>{github.followers}</span>{" "}
+                      <b style={{ color: color.text, fontWeight: 600 }}>
+                        <CountUp value={github.followers} />
+                      </b>{" "}
                       {L(labels.githubFollowers)}
                     </span>
                   )}
+                  {github.totalStars > 0 && (
+                    <span>
+                      <b style={{ color: color.yellow, fontWeight: 600 }}>
+                        ★ <CountUp value={github.totalStars} />
+                      </b>{" "}
+                      {L(labels.totalStars)}
+                    </span>
+                  )}
+                </div>
+              )}
+              {github && github.longestStreak > 0 && (
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "6px 16px",
+                    flexWrap: "wrap",
+                    marginTop: 6,
+                    fontSize: 12,
+                    color: color.muted,
+                  }}
+                >
+                  <span>
+                    {L(labels.currentStreak)}{" "}
+                    <b style={{ color: color.green, fontWeight: 600 }}>
+                      <CountUp value={github.currentStreak} />
+                    </b>{" "}
+                    {L(labels.days)}
+                  </span>
+                  <span>
+                    {L(labels.longestStreak)}{" "}
+                    <b style={{ color: color.text, fontWeight: 600 }}>
+                      <CountUp value={github.longestStreak} />
+                    </b>{" "}
+                    {L(labels.days)}
+                  </span>
                 </div>
               )}
               <div style={{ fontSize: 12, color: color.muted, lineHeight: 1.6, marginTop: 10 }}>
@@ -932,7 +1022,7 @@ export default function Home() {
                   }}
                 >
                   {github.repos.map((repo) => (
-                    <RepoTile key={repo.name} repo={repo} />
+                    <RepoTile key={repo.name} repo={repo} lang={lang} />
                   ))}
                 </div>
               </Card>
@@ -1122,6 +1212,8 @@ function LanguageBar({ languages, label }: { languages: GithubLang[]; label: str
         {label}
       </div>
       <div
+        role="img"
+        aria-label={`${label}: ${languages.map((l) => `${l.name} ${l.pct}%`).join(", ")}`}
         style={{
           display: "flex",
           width: "100%",
@@ -1134,6 +1226,7 @@ function LanguageBar({ languages, label }: { languages: GithubLang[]; label: str
         {languages.map((lng) => (
           <div
             key={lng.name}
+            aria-hidden
             title={`${lng.name} · ${lng.pct}%`}
             style={{ width: `${lng.pct}%`, background: colorFor(lng.name) }}
           />
@@ -1155,7 +1248,7 @@ function LanguageBar({ languages, label }: { languages: GithubLang[]; label: str
   );
 }
 
-function RepoTile({ repo }: { repo: GithubRepo }) {
+function RepoTile({ repo, lang }: { repo: GithubRepo; lang: Lang }) {
   return (
     <a
       href={repo.url}
@@ -1181,6 +1274,22 @@ function RepoTile({ repo }: { repo: GithubRepo }) {
         <span style={{ color: color.text, fontWeight: 600, fontSize: 13, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {repo.name}
         </span>
+        {repo.archived && (
+          <span
+            style={{
+              fontSize: 9.5,
+              padding: "1px 5px",
+              border: `1px solid ${color.borderSoft}`,
+              borderRadius: 3,
+              color: color.faint,
+              textTransform: "uppercase",
+              letterSpacing: ".04em",
+              flex: "none",
+            }}
+          >
+            {t(labels.archived, lang)}
+          </span>
+        )}
       </div>
       <div className="clamp-2" style={{ fontSize: 12, color: color.muted, lineHeight: 1.5, flex: 1 }}>
         {repo.description || "—"}
@@ -1200,6 +1309,7 @@ function RepoTile({ repo }: { repo: GithubRepo }) {
           </span>
         )}
         <span>★ {repo.stars}</span>
+        <span style={{ marginLeft: "auto" }}>{relativeTime(repo.pushedAt, lang)}</span>
       </div>
     </a>
   );

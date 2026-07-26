@@ -3,6 +3,7 @@ import { identity } from "@/lib/content";
 import {
   aggregateLanguages,
   buildGrid,
+  computeStreaks,
   parseContributionsHtml,
   type LangSlice,
 } from "@/lib/github";
@@ -45,6 +46,7 @@ interface Repo {
   stars: number;
   url: string;
   pushedAt: string;
+  archived: boolean;
 }
 
 interface RecentActivity {
@@ -71,6 +73,11 @@ interface GithubPayload {
   windowTotal: number;
   publicRepos: number | null;
   followers: number | null;
+  /** Total stargazers across all owned repos. */
+  totalStars: number;
+  /** Current / longest contribution streak in days. */
+  currentStreak: number;
+  longestStreak: number;
   /** Top owned (non-fork) repositories, most notable first. */
   repos: Repo[];
   /** Primary-language distribution across owned repos. */
@@ -121,6 +128,7 @@ interface RawRepo {
   html_url: string;
   pushed_at: string;
   fork: boolean;
+  archived: boolean;
   default_branch: string;
 }
 
@@ -151,13 +159,14 @@ async function fetchRepos(): Promise<{
   repos: Repo[];
   languages: LangSlice[];
   recent: RecentActivity[];
+  totalStars: number;
 }> {
   try {
     const res = await fetch(
       `https://api.github.com/users/${identity.githubHandle}/repos?per_page=100&sort=pushed`,
       { next: { revalidate }, headers: GH_HEADERS },
     );
-    if (!res.ok) return { repos: [], languages: [], recent: [] };
+    if (!res.ok) return { repos: [], languages: [], recent: [], totalStars: 0 };
     const raw = (await res.json()) as RawRepo[];
     const owned = raw.filter((r) => !r.fork && r.name !== identity.githubHandle);
 
@@ -175,9 +184,11 @@ async function fetchRepos(): Promise<{
         stars: r.stargazers_count,
         url: r.html_url,
         pushedAt: r.pushed_at,
+        archived: Boolean(r.archived),
       }));
 
     const languages = aggregateLanguages(owned.map((r) => r.language));
+    const totalStars = owned.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
 
     // `owned` is already newest-pushed first (sort=pushed).
     const recentRepos = owned.slice(0, RECENT_LIMIT);
@@ -190,9 +201,9 @@ async function fetchRepos(): Promise<{
       url: r.html_url,
     }));
 
-    return { repos, languages, recent };
+    return { repos, languages, recent, totalStars };
   } catch {
-    return { repos: [], languages: [], recent: [] };
+    return { repos: [], languages: [], recent: [], totalStars: 0 };
   }
 }
 
@@ -203,11 +214,13 @@ export async function GET() {
       fetchProfile(),
       fetchRepos(),
     ]);
+    const now = new Date();
     const { cells, counts, dates, monthLabels, windowTotal } = buildGrid(
       levelByDate,
       countByDate,
-      new Date(),
+      now,
     );
+    const { current: currentStreak, longest: longestStreak } = computeStreaks(countByDate, now);
     let totalLastYear = 0;
     for (const c of countByDate.values()) totalLastYear += c;
 
@@ -221,6 +234,9 @@ export async function GET() {
       windowTotal,
       publicRepos: profile.publicRepos,
       followers: profile.followers,
+      totalStars: repoData.totalStars,
+      currentStreak,
+      longestStreak,
       repos: repoData.repos,
       languages: repoData.languages,
       recent: repoData.recent,
@@ -239,6 +255,9 @@ export async function GET() {
       windowTotal: 0,
       publicRepos: null,
       followers: null,
+      totalStars: 0,
+      currentStreak: 0,
+      longestStreak: 0,
       repos: [],
       languages: [],
       recent: [],

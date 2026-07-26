@@ -118,6 +118,52 @@ export function buildGrid(
   return { cells, counts, dates, monthLabels, windowTotal };
 }
 
+export interface Streaks {
+  /** Consecutive days with ≥1 contribution ending today (or yesterday if today
+   *  has none yet). */
+  current: number;
+  /** The longest run of consecutive contribution days on record. */
+  longest: number;
+}
+
+/**
+ * Compute current and longest contribution streaks from a date→count map.
+ * `now` is injected for deterministic tests. Only calendar-adjacent days extend
+ * a run, so gaps in the map correctly break streaks.
+ */
+export function computeStreaks(countByDate: Map<string, number>, now: Date): Streaks {
+  const has = (key: string) => (countByDate.get(key) ?? 0) > 0;
+  const shift = (key: string, days: number): string =>
+    dateKey(new Date(new Date(`${key}T00:00:00Z`).getTime() + days * DAY_MS));
+
+  // Longest: scan sorted dates, extending the run only across adjacent days.
+  const dates = [...countByDate.keys()].sort();
+  let longest = 0;
+  let run = 0;
+  let prev: string | null = null;
+  for (const d of dates) {
+    if (!has(d)) {
+      run = 0;
+      prev = d;
+      continue;
+    }
+    run = prev !== null && shift(prev, 1) === d ? run + 1 : 1;
+    if (run > longest) longest = run;
+    prev = d;
+  }
+
+  // Current: walk backward from today (or yesterday if today is still empty).
+  const todayKey = dateKey(now);
+  let cursor = has(todayKey) ? todayKey : shift(todayKey, -1);
+  let current = 0;
+  while (has(cursor)) {
+    current++;
+    cursor = shift(cursor, -1);
+  }
+
+  return { current, longest };
+}
+
 export interface LangSlice {
   name: string;
   count: number;

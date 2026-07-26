@@ -219,6 +219,11 @@ export const labels = {
   recentActivity: { ko: "최근 활동", en: "Recent Activity" },
   onBranch: { ko: "브랜치", en: "on branch" },
   languages: { ko: "주력 언어", en: "Languages" },
+  currentStreak: { ko: "현재 스트릭", en: "Current streak" },
+  longestStreak: { ko: "최장 스트릭", en: "Longest streak" },
+  totalStars: { ko: "총 스타", en: "Total stars" },
+  days: { ko: "일", en: "days" },
+  archived: { ko: "보관됨", en: "archived" },
   fullStack: { ko: "풀스택 개발자", en: "Full-Stack Developer" },
   university: { ko: "인하대학교", en: "Inha University" },
   palettePlaceholder: {
@@ -232,6 +237,25 @@ export const labels = {
 export const weekdayShort: Record<Lang, string[]> = {
   ko: ["일", "월", "화", "수", "목", "금", "토"],
   en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+};
+
+/**
+ * Compact relative time for a repo's last push, e.g. "3 days ago" / "3일 전".
+ * Client-only (reads the current time); repo tiles render after the live fetch.
+ */
+export const relativeTime = (iso: string, lang: Lang): string => {
+  const then = new Date(iso).getTime();
+  if (!Number.isFinite(then)) return "";
+  const days = Math.floor((Date.now() - then) / 86_400_000);
+  if (days <= 0) return lang === "ko" ? "오늘" : "today";
+  if (days === 1) return lang === "ko" ? "어제" : "yesterday";
+  if (days < 30) return lang === "ko" ? `${days}일 전` : `${days} days ago`;
+  const months = Math.floor(days / 30);
+  if (months < 12) {
+    return lang === "ko" ? `${months}개월 전` : `${months} month${months > 1 ? "s" : ""} ago`;
+  }
+  const years = Math.floor(days / 365);
+  return lang === "ko" ? `${years}년 전` : `${years} year${years > 1 ? "s" : ""} ago`;
 };
 
 /** Short month names, used to format contribution-cell tooltips. */
