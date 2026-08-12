@@ -12,13 +12,13 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "next": "^16.2.11",
+    "next": "^16.3.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
   "//overrides": "Force patched transitive deps that Next still pins to vulnerable versions: postcss (GHSA-qx2v-qp2m-jg93, GHSA-6g55-p6wh-862q) and sharp/libvips (GHSA-f88m-g3jw-g9cj). Both are same-major, backward-compatible bumps. Revisit when a Next release ships the patched versions itself.",
   "overrides": {
-    "postcss": "^8.5.22",
+    "postcss": "^8.5.26",
     "sharp": "^0.35.3",
     "@eslint/plugin-kit": "^0.3.4"
   },
