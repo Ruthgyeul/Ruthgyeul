@@ -1,9 +1,7 @@
-import { color } from "@/lib/theme";
+import { TERMINAL_BAR_HEIGHT } from "@/lib/layout";
 
-const dot = (bg: string) => (
-  <span
-    style={{ width: 10, height: 10, borderRadius: 999, background: bg }}
-  />
+const dot = (className: string) => (
+  <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${className}`} />
 );
 
 /**
@@ -19,39 +17,21 @@ export function TerminalBar({
 }) {
   return (
     <div
-      style={{
-        position: sticky ? "sticky" : "relative",
-        top: sticky ? 0 : undefined,
-        zIndex: 20,
-        height: 38,
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        padding: "0 20px",
-        background: sticky ? "rgba(13,17,25,.9)" : color.bgPanel,
-        backdropFilter: sticky ? "blur(6px)" : undefined,
-        borderBottom: `1px solid ${color.borderSoft}`,
-      }}
+      className={`z-20 flex items-center gap-2 overflow-hidden border-b border-border-soft px-3 sm:px-5 ${
+        sticky ? "sticky top-0 bg-[rgba(13,17,25,.9)] backdrop-blur-sm" : "relative bg-bg-panel"
+      }`}
+      style={{ height: TERMINAL_BAR_HEIGHT }}
     >
-      {dot(color.red)}
-      {dot(color.yellow)}
-      {dot(color.green)}
-      <span style={{ marginLeft: 10, fontSize: 12, color: color.faint }}>
-        jaeah@ruthgyeul <span style={{ color: color.fainter }}>—</span> ~/portfolio{" "}
-        <span style={{ color: color.fainter }}>—</span> zsh
+      {dot("bg-red")}
+      {dot("bg-yellow")}
+      {dot("bg-green")}
+      <span className="ml-2.5 min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-faint sm:flex-initial">
+        jaeah@ruthgyeul <span className="text-fainter">—</span> ~/portfolio{" "}
+        <span className="text-fainter">—</span> zsh
       </span>
       {branch && (
-        <span
-          style={{
-            marginLeft: "auto",
-            fontSize: 12,
-            color: color.faint,
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-          }}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color.faint} strokeWidth="2">
+        <span className="ml-auto hidden shrink-0 items-center gap-1.5 text-xs text-faint sm:flex">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="6" cy="6" r="2.2" />
             <circle cx="6" cy="18" r="2.2" />
             <circle cx="18" cy="12" r="2.2" />

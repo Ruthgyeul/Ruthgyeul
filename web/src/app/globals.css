@@ -1,11 +1,43 @@
 /*
  * Global styles ported from the approved mockups.
- * Colors mirror src/lib/theme.ts; the font family is injected by next/font
- * (self-hosted IBM Plex Mono) via the --font-mono variable set on <html>.
+ * Colors mirror src/lib/theme.ts (kept as the JS source of truth for
+ * runtime-computed colors — contribution heat shades, per-language dots,
+ * per-award accents — that can't be static Tailwind classes) and are mirrored
+ * here as Tailwind v4 theme tokens so static color/spacing/breakpoint
+ * utilities are available everywhere. The font family is injected by
+ * next/font (self-hosted IBM Plex Mono) via the --font-mono variable set on
+ * <html>, which this file's @theme block also exposes as `font-mono`.
  */
 
-:root {
+@import "tailwindcss";
+
+@theme {
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-bg: #0a0d13;
+  --color-bg-panel: #0d1119;
+  --color-card: #111621;
+  --color-card-inset: #0d1119;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-soft: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-overlay: rgba(255, 255, 255, 0.12);
+  --color-border-pill: rgba(255, 255, 255, 0.15);
+  --color-border-interactive: rgba(255, 255, 255, 0.16);
+  --color-text: #e6e8ee;
+  --color-text-dim: #c3c8d4;
+  --color-muted: #8b93a7;
+  --color-faint: #5c6478;
+  --color-fainter: #3a4152;
+  --color-gutter: #3a4152;
+  --color-accent: #38bdf8;
+  --color-accent-soft: #7cd4fb;
+  --color-link: #5c9bd8;
+  --color-green: #34d399;
+  --color-yellow: #fbbf24;
+  --color-red: #f87171;
+  --color-pink: #f472b6;
+  --color-lime: #a3e635;
 }
 
 * {
@@ -19,8 +51,8 @@ body {
 }
 
 body {
-  background: #0a0d13;
-  color: #e6e8ee;
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-mono);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -28,10 +60,10 @@ body {
 }
 
 a {
-  color: #38bdf8;
+  color: var(--color-accent);
 }
 a:hover {
-  color: #7cd4fb;
+  color: var(--color-accent-soft);
 }
 
 ::selection {
@@ -44,7 +76,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -70,21 +102,50 @@ input:focus-visible,
   }
 }
 
-/* Let grid items shrink below their content's intrinsic width so children with
- * `overflow: hidden` / ellipsis actually clip instead of blowing out the track
- * (the default `min-width: auto` on grid items causes horizontal overflow). */
-.dash-grid > div {
-  min-width: 0;
-}
-
-/* Responsive: collapse the 12-col dashboard to a single column on small screens. */
-@media (max-width: 860px) {
-  .dash-grid {
-    grid-template-columns: 1fr !important;
-  }
+@layer components {
+  /* Let grid items shrink below their content's intrinsic width so children
+   * with `overflow: hidden` / ellipsis actually clip instead of blowing out
+   * the track (the default `min-width: auto` on grid items causes overflow). */
   .dash-grid > div {
-    grid-column: span 1 !important;
-    grid-row: auto !important;
+    min-width: 0;
+  }
+
+  /* Card hover lift — applied to elements tagged with the .card class. */
+  .card {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(56, 189, 248, 0.35);
+    border-color: rgba(56, 189, 248, 0.35);
+  }
+
+  /* Generic hover-accent helper for links/buttons that brighten on hover. */
+  .hover-accent:hover {
+    border-color: var(--color-accent) !important;
+    color: var(--color-accent) !important;
+  }
+  .hover-soft:hover {
+    background: rgba(56, 189, 248, 0.08) !important;
+  }
+
+  /* Clamp text to two lines with an ellipsis (repo descriptions). */
+  .clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Repo tile: lift + accent border on hover without touching text color. */
+  .repo-tile {
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .repo-tile:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.4) !important;
+    background: rgba(56, 189, 248, 0.05) !important;
   }
 }
 
@@ -94,57 +155,19 @@ input:focus-visible,
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0d13;
+  background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
   background: #242b3a;
   border-radius: 5px;
-  border: 2px solid #0a0d13;
+  border: 2px solid var(--color-bg);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: var(--color-accent);
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: #242b3a #0a0d13;
-}
-
-/* Card hover lift — applied to elements tagged with the .card class. */
-.card {
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(56, 189, 248, 0.35);
-  border-color: rgba(56, 189, 248, 0.35);
-}
-
-/* Generic hover-accent helper for links/buttons that brighten on hover. */
-.hover-accent:hover {
-  border-color: #38bdf8 !important;
-  color: #38bdf8 !important;
-}
-.hover-soft:hover {
-  background: rgba(56, 189, 248, 0.08) !important;
-}
-
-/* Clamp text to two lines with an ellipsis (repo descriptions). */
-.clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Repo tile: lift + accent border on hover without touching text color. */
-.repo-tile {
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-}
-.repo-tile:hover {
-  transform: translateY(-2px);
-  border-color: rgba(56, 189, 248, 0.4) !important;
-  background: rgba(56, 189, 248, 0.05) !important;
+  scrollbar-color: #242b3a var(--color-bg);
 }
 
 /* Respect reduced-motion preferences. */

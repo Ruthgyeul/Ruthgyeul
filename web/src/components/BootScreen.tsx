@@ -1,5 +1,3 @@
-import { color } from "@/lib/theme";
-
 /**
  * Fake boot sequence overlay shown on first paint. Purely decorative; it fades
  * out and is removed from the DOM once the animation completes.
@@ -15,45 +13,24 @@ export function BootScreen({
 }) {
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 100,
-        background: color.bg,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        opacity: fading ? 0 : 1,
-        transition: "opacity .4s ease",
-        pointerEvents: fading ? "none" : "auto",
-      }}
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-bg transition-opacity duration-[400ms] ease-out ${
+        fading ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
+      }`}
     >
-      <div style={{ fontSize: 13, color: color.muted, lineHeight: 2.1, width: 280 }}>
+      <div className="w-[280px] text-[13px] leading-[2.1] text-muted">
         {lines.map((line, i) => (
           <div key={i}>
-            <span style={{ color: color.green }}>$</span> {line}
+            <span className="text-green">$</span> {line}
           </div>
         ))}
-        <span style={{ color: color.green, animation: "pulse 1s step-end infinite" }}>▌</span>
-        <div
-          style={{
-            marginTop: 14,
-            height: 3,
-            background: "rgba(255,255,255,.08)",
-            borderRadius: 2,
-            overflow: "hidden",
-          }}
-        >
+        <span className="text-green [animation:pulse_1s_step-end_infinite]">▌</span>
+        <div className="mt-3.5 h-[3px] overflow-hidden rounded-sm bg-white/8">
           <div
-            style={{
-              height: "100%",
-              width: `${progressPct}%`,
-              background: "linear-gradient(90deg,#38bdf8,#34d399)",
-              transition: "width .35s ease",
-            }}
+            className="h-full bg-gradient-to-r from-accent to-green transition-[width] duration-[350ms] ease-out"
+            style={{ width: `${progressPct}%` }}
           />
         </div>
-        <div style={{ marginTop: 6, fontSize: 11, color: color.faint }}>{progressPct}%</div>
+        <div className="mt-1.5 text-[11px] text-faint">{progressPct}%</div>
       </div>
     </div>
   );

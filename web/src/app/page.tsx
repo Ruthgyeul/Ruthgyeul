@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BootScreen } from "@/components/BootScreen";
 import { CommandPalette, type PaletteItem } from "@/components/CommandPalette";
 import { TerminalBar } from "@/components/TerminalBar";
-import { color, contribShades, languageColor } from "@/lib/theme";
+import { TERMINAL_BAR_HEIGHT } from "@/lib/layout";
+import { contribShades, languageColor } from "@/lib/theme";
 import {
   awards,
   bio,
@@ -353,16 +354,8 @@ export default function Home() {
 
       {/* Scroll progress bar */}
       <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          height: 2,
-          background: "linear-gradient(90deg,#38bdf8,#34d399)",
-          width: `${scrollPct}%`,
-          zIndex: 101,
-          transition: "width .1s linear",
-        }}
+        className="fixed left-0 top-0 z-[101] h-0.5 bg-gradient-to-r from-accent to-green transition-[width] duration-100 ease-linear"
+        style={{ width: `${scrollPct}%` }}
       />
 
       {paletteOpen && (
@@ -377,270 +370,118 @@ export default function Home() {
 
       <div
         onMouseMove={onMouseMove}
+        className="relative min-h-screen bg-bg"
         style={{
-          minHeight: "100vh",
-          position: "relative",
-          background:
-            "radial-gradient(1200px 600px at 15% -10%, rgba(56,189,248,.06), transparent), repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0px, rgba(255,255,255,.012) 1px, transparent 1px, transparent 24px), #0a0d13",
+          backgroundImage:
+            "radial-gradient(1200px 600px at 15% -10%, rgba(56,189,248,.06), transparent), repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0px, rgba(255,255,255,.012) 1px, transparent 1px, transparent 24px)",
         }}
       >
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 0,
-            pointerEvents: "none",
-            background: spotlightBg,
-          }}
-        />
+        <div className="pointer-events-none fixed inset-0 z-0" style={{ background: spotlightBg }} />
 
         <TerminalBar sticky branch="main" />
 
-        <div
-          style={{
-            maxWidth: 1440,
-            margin: "0 auto",
-            padding: "20px 28px 64px",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div className="relative z-[1] mx-auto max-w-[1440px] px-4 pb-16 pt-5 sm:px-7">
           {/* Sticky identity header */}
           <header
-            style={{
-              position: "sticky",
-              top: 38,
-              zIndex: 19,
-              background: "rgba(10,13,19,.92)",
-              backdropFilter: "blur(6px)",
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              padding: `${scrolled ? "6px" : "14px"} 0`,
-              flexWrap: "wrap",
-              transition: "padding .15s ease",
-              margin: "0 -2px",
-            }}
+            className={`sticky z-[19] -mx-0.5 flex flex-wrap items-center gap-3 bg-[rgba(10,13,19,.92)] backdrop-blur-[6px] transition-[padding] duration-150 ease-in-out ${
+              scrolled ? "py-1.5" : "py-3.5"
+            }`}
+            style={{ top: TERMINAL_BAR_HEIGHT }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color.accent} strokeWidth="1.6">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="text-accent">
               <rect x="3" y="4" width="18" height="6" rx="1.2" />
               <rect x="3" y="14" width="18" height="6" rx="1.2" />
-              <circle cx="7" cy="7" r="0.6" fill={color.accent} />
-              <circle cx="7" cy="17" r="0.6" fill={color.accent} />
+              <circle cx="7" cy="7" r="0.6" fill="currentColor" />
+              <circle cx="7" cy="17" r="0.6" fill="currentColor" />
             </svg>
-            <span style={{ fontSize: 19, fontWeight: 600, letterSpacing: ".02em" }}>JAEAH LEE</span>
-            <span
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: 999,
-                background: color.green,
-                animation: "pulse 2s ease-in-out infinite",
-              }}
-            />
-            <span style={{ position: "relative" }}>
+            <span className="text-[19px] font-semibold tracking-[.02em]">JAEAH LEE</span>
+            <LiveDot />
+            <span className="relative">
               <button
                 onClick={() => setShowAvailTip((s) => !s)}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  fontFamily: "inherit",
-                  fontSize: 12,
-                  color: color.green,
-                  textTransform: "uppercase",
-                  letterSpacing: ".08em",
-                  cursor: "pointer",
-                  padding: 0,
-                }}
+                className="flex min-h-11 cursor-pointer items-center border-none bg-transparent p-0 font-[inherit] text-xs uppercase tracking-[.08em] text-green"
               >
                 {L(labels.available)}
               </button>
               {showAvailTip && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 22,
-                    left: 0,
-                    background: color.card,
-                    border: "1px solid rgba(255,255,255,.1)",
-                    borderRadius: 6,
-                    padding: "10px 12px",
-                    fontSize: 11.5,
-                    color: color.textDim,
-                    whiteSpace: "nowrap",
-                    boxShadow: "0 8px 24px rgba(0,0,0,.4)",
-                    zIndex: 30,
-                    textTransform: "none",
-                    letterSpacing: 0,
-                  }}
-                >
+                <div className="absolute left-0 top-[22px] z-30 whitespace-nowrap rounded-md border border-border-subtle bg-card px-3 py-2.5 text-[11.5px] normal-case tracking-normal text-text-dim shadow-[0_8px_24px_rgba(0,0,0,.4)]">
                   {L(labels.availTip)}
                 </div>
               )}
             </span>
-            <div
-              style={{
-                marginLeft: "auto",
-                display: "flex",
-                alignItems: "center",
-                gap: 18,
-                fontSize: 12,
-                color: color.muted,
-                flexWrap: "wrap",
-              }}
-            >
+            <div className="ml-auto flex flex-wrap items-center gap-4.5 text-xs text-muted">
               <span>
-                <span style={{ color: color.green }}>●</span> Live · {clock}
-                <span style={{ color: color.green, animation: "pulse 1s step-end infinite" }}>▌</span>
+                <span className="text-green">●</span> Live · {clock}
+                <span className="text-green [animation:pulse_1s_step-end_infinite]">▌</span>
               </span>
               <span>{L(labels.fullStack)}</span>
               <span>{L(labels.university)}</span>
               <span>{dateStr}</span>
               <button
                 onClick={toggleLang}
-                className="hover-accent"
-                style={{
-                  background: "transparent",
-                  border: "1px solid rgba(255,255,255,.16)",
-                  color: color.text,
-                  fontFamily: "inherit",
-                  fontSize: 11,
-                  padding: "5px 10px",
-                  borderRadius: 4,
-                  cursor: "pointer",
-                  letterSpacing: ".04em",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}
+                className="hover-accent flex min-h-11 cursor-pointer items-center gap-1.5 rounded border border-border-interactive bg-transparent px-2.5 text-[11px] tracking-[.04em] text-text"
               >
                 {isKo ? "EN" : "KO"}
-                <span
-                  style={{
-                    fontSize: 9,
-                    padding: "1px 4px",
-                    border: "1px solid rgba(255,255,255,.15)",
-                    borderRadius: 3,
-                    color: color.faint,
-                  }}
-                >
+                <span className="rounded-[3px] border border-border-pill px-1 py-px text-[9px] text-faint">
                   ⇧L
                 </span>
               </button>
               <button
                 onClick={() => { setPaletteOpen(true); setPaletteQuery(""); }}
-                className="hover-accent"
-                style={{
-                  background: "transparent",
-                  border: "1px solid rgba(255,255,255,.16)",
-                  color: color.muted,
-                  fontFamily: "inherit",
-                  fontSize: 11,
-                  padding: "5px 10px",
-                  borderRadius: 4,
-                  cursor: "pointer",
-                  letterSpacing: ".04em",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}
+                aria-label={L(labels.palettePlaceholder)}
+                className="hover-accent flex min-h-11 cursor-pointer items-center gap-1.5 rounded border border-border-interactive bg-transparent px-2.5 text-[11px] tracking-[.04em] text-muted"
               >
-                ⌘K
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:hidden">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+                <span className="hidden sm:inline">⌘K</span>
               </button>
             </div>
           </header>
 
           {/* Status line */}
-          <div
-            style={{
-              borderTop: `1px solid ${color.border}`,
-              borderBottom: `1px solid ${color.border}`,
-              padding: "10px 2px",
-              marginBottom: 20,
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              fontSize: 13,
-              color: color.green,
-            }}
-          >
+          <div className="mb-5 flex items-center gap-2 border-y border-border px-0.5 py-2.5 text-[13px] text-green">
             <span>✓</span>
             <span>{L(statusLine)}</span>
           </div>
 
           {/* whoami */}
-          <div
-            style={{
-              fontSize: 13,
-              color: color.muted,
-              marginBottom: 16,
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "6px 10px",
-            }}
-          >
-            <span style={{ color: color.green }}>jaeah@ruthgyeul</span>
-            <span style={{ color: color.faint }}>:~$</span>
-            <span style={{ color: color.text }}>whoami</span>
+          <div className="mb-4 flex flex-wrap gap-x-2.5 gap-y-1.5 text-[13px] text-muted">
+            <span className="text-green">jaeah@ruthgyeul</span>
+            <span className="text-faint">:~$</span>
+            <span className="text-text">whoami</span>
           </div>
-          <div
-            style={{
-              fontSize: 13,
-              color: color.textDim,
-              margin: "-8px 0 20px",
-              paddingLeft: 2,
-              lineHeight: 1.6,
-            }}
-          >
+          <div className="-mt-2 mb-5 pl-0.5 text-[13px] leading-[1.6] text-text-dim">
             → {whoami[lang].slice(0, typedLen)}
-            <span style={{ color: color.green, animation: "pulse .9s step-end infinite" }}>▌</span>
+            <span className="text-green [animation:pulse_.9s_step-end_infinite]">▌</span>
           </div>
 
           {/* Dashboard grid */}
-          <div
-            className="dash-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(12,1fr)",
-              gap: 16,
-              gridAutoFlow: "dense",
-            }}
-          >
+          <div className="dash-grid grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:grid-flow-row-dense">
             {/* Profile card */}
-            <Card style={{ gridColumn: "span 5", gridRow: "span 2", display: "flex", flexDirection: "column", gap: 16, padding: 22 }} delay={0}>
-              <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+            <Card delay={0} className="flex flex-col gap-4 p-5.5 sm:col-span-2 lg:col-span-5 lg:row-span-2">
+              <div className="flex items-center gap-4">
                 <div
                   aria-hidden
-                  style={{
-                    width: 64,
-                    height: 64,
-                    flex: "none",
-                    borderRadius: 999,
-                    background: "linear-gradient(135deg,#38bdf8,#34d399)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: 700,
-                    fontSize: 20,
-                    color: "#0a0d13",
-                  }}
+                  className="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-gradient-to-br from-accent to-green text-xl font-bold text-bg"
                 >
                   JL
                 </div>
                 <div>
-                  <div style={{ fontSize: 22, fontWeight: 700 }}>
+                  <div className="text-[22px] font-bold">
                     {identity.nameKo}{" "}
-                    <span style={{ color: color.muted, fontWeight: 400 }}>/ {identity.nameEn}</span>
+                    <span className="font-normal text-muted">/ {identity.nameEn}</span>
                   </div>
-                  <div style={{ fontSize: 12, color: color.link, marginTop: 4 }}>
+                  <div className="mt-1 text-xs text-link">
                     {identity.githubPath}
-                    <span style={{ color: color.text }}>{identity.githubHandle}</span>
+                    <span className="text-text">{identity.githubHandle}</span>
                   </div>
                 </div>
               </div>
-              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.75, color: color.textDim }}>{L(bio)}</p>
+              <p className="m-0 text-sm leading-[1.75] text-text-dim">{L(bio)}</p>
               <CodeBlock />
-              <div style={{ display: "flex", gap: 8, marginTop: "auto" }}>
+              <div className="mt-auto flex gap-2">
                 <SocialButton href={links.github} label="GITHUB" />
                 <SocialButton href={links.linkedin} label="LINKEDIN" />
                 <SocialButton href={links.instagram} label="INSTAGRAM" />
@@ -648,32 +489,25 @@ export default function Home() {
             </Card>
 
             {/* Main stack */}
-            <Card id="sec-skills" style={{ gridColumn: "span 4" }} delay={0.05}>
-              <SectionLabel>{L(labels.mainStack)}</SectionLabel>
+            <Card id="sec-skills" delay={0.05} className="lg:col-span-4">
+              <SectionLabel className="mb-3.5">{L(labels.mainStack)}</SectionLabel>
               <TagRow items={mainSkills} />
             </Card>
 
             {/* Tools */}
-            <Card style={{ gridColumn: "span 3" }} delay={0.1}>
-              <SectionLabel>{L(labels.tools)}</SectionLabel>
+            <Card delay={0.1} className="lg:col-span-3">
+              <SectionLabel className="mb-3.5">{L(labels.tools)}</SectionLabel>
               <TagRow items={tools} />
             </Card>
 
             {/* Learning */}
-            <Card style={{ gridColumn: "span 4" }} delay={0.15}>
-              <SectionLabel>{L(labels.learning)}</SectionLabel>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+            <Card delay={0.15} className="lg:col-span-4">
+              <SectionLabel className="mb-3.5">{L(labels.learning)}</SectionLabel>
+              <div className="flex flex-wrap gap-1.75">
                 {learning.map((item) => (
                   <span
                     key={item}
-                    style={{
-                      fontSize: 12,
-                      padding: "4px 9px",
-                      background: "rgba(251,191,36,.08)",
-                      border: "1px dashed rgba(251,191,36,.35)",
-                      borderRadius: 4,
-                      color: color.yellow,
-                    }}
+                    className="rounded border border-dashed border-[rgba(251,191,36,.35)] bg-[rgba(251,191,36,.08)] px-2.25 py-1 text-xs text-yellow"
                   >
                     {item}
                   </span>
@@ -682,96 +516,43 @@ export default function Home() {
             </Card>
 
             {/* Awards */}
-            <Card id="sec-awards" style={{ gridColumn: "span 3", gridRow: "span 3", display: "flex", flexDirection: "column" }} delay={0.2}>
-              <SectionLabel>{L(labels.awards)}</SectionLabel>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16, overflow: "auto" }}>
+            <Card id="sec-awards" delay={0.2} className="flex flex-col lg:col-span-3 lg:row-span-3">
+              <SectionLabel className="mb-3.5">{L(labels.awards)}</SectionLabel>
+              <div className="flex flex-col gap-4 overflow-auto">
                 {awards.map((a, i) => (
-                  <div key={i} style={{ borderLeft: `2px solid ${a.color}`, paddingLeft: 10 }}>
-                    <div style={{ fontSize: 11, color: color.muted }}>{a.date}</div>
-                    <div style={{ fontSize: 13, color: color.text, marginTop: 3 }}>{L(a.title)}</div>
-                    <div style={{ fontSize: 12, marginTop: 3, color: a.color }}>{L(a.note)}</div>
+                  <div key={i} className="border-l-2 pl-2.5" style={{ borderColor: a.color }}>
+                    <div className="text-[11px] text-muted">{a.date}</div>
+                    <div className="mt-0.75 text-[13px] text-text">{L(a.title)}</div>
+                    <div className="mt-0.75 text-xs" style={{ color: a.color }}>{L(a.note)}</div>
                   </div>
                 ))}
               </div>
             </Card>
 
             {/* GitHub contributions */}
-            <Card style={{ gridColumn: "span 5" }} delay={0.25}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 14,
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    fontSize: 12,
-                    color: color.muted,
-                    textTransform: "uppercase",
-                    letterSpacing: ".06em",
-                  }}
-                >
-                  <span style={{ color: color.faint, fontWeight: 600 }}>{"//"}</span>
-                  GitHub
-                </div>
+            <Card delay={0.25} className="lg:col-span-5">
+              <div className="mb-3.5 flex items-center justify-between">
+                <SectionLabel>GitHub</SectionLabel>
                 {github && (
-                  <span
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                      fontSize: 11,
-                      color: color.green,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: 6,
-                        height: 6,
-                        borderRadius: 999,
-                        background: color.green,
-                        animation: "pulse 2s ease-in-out infinite",
-                      }}
-                    />
+                  <span className="flex items-center gap-1.5 text-[11px] text-green">
+                    <LiveDot size={6} />
                     <CountUp value={github.totalLastYear} /> {L(labels.githubContribs)}
                   </span>
                 )}
               </div>
-              <div style={{ display: "flex", gap: 5 }}>
+              <div className="flex gap-1.25">
                 <div
                   aria-hidden
-                  style={{
-                    display: "grid",
-                    gridTemplateRows: "repeat(7,1fr)",
-                    gap: 3,
-                    paddingTop: 14,
-                    fontSize: 9,
-                    color: color.faint,
-                    textAlign: "right",
-                    flex: "none",
-                  }}
+                  className="grid flex-none grid-rows-[repeat(7,1fr)] gap-0.75 pt-3.5 text-right text-[9px] text-faint"
                 >
                   {weekdayLabels.map((w, i) => (
                     <div key={i}>{w}</div>
                   ))}
                 </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div className="min-w-0 flex-1">
                   <div
                     aria-hidden
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(26,1fr)",
-                      gap: 3,
-                      marginBottom: 4,
-                      fontSize: 9,
-                      color: color.faint,
-                      whiteSpace: "nowrap",
-                    }}
+                    className="mb-1 grid grid-cols-[repeat(26,1fr)] gap-0.75 whitespace-nowrap text-[9px] text-faint"
                   >
                     {monthLabels.map((m, i) => (
                       <div key={i}>{m}</div>
@@ -784,21 +565,15 @@ export default function Home() {
                         ? `GitHub contribution graph — ${github.totalLastYear} contributions in the last year`
                         : "GitHub contribution graph"
                     }
-                    style={{ display: "grid", gridTemplateColumns: "repeat(26,1fr)", gap: 3 }}
+                    className="grid grid-cols-[repeat(26,1fr)] gap-0.75"
                   >
                     {ghStatus === "loading"
                       ? Array.from({ length: 182 }, (_, i) => (
                           <div
                             key={i}
                             aria-hidden
-                            style={{
-                              width: "100%",
-                              paddingBottom: "100%",
-                              borderRadius: 2,
-                              background: color.cardInset,
-                              animation: "pulse 1.4s ease-in-out infinite",
-                              animationDelay: `${(i % 26) * 0.03}s`,
-                            }}
+                            className="aspect-square rounded-sm bg-card-inset [animation:pulse_1.4s_ease-in-out_infinite]"
+                            style={{ animationDelay: `${(i % 26) * 0.03}s` }}
                           />
                         ))
                       : contribCells.map((bg, i) => (
@@ -810,26 +585,18 @@ export default function Home() {
                                 ? contribTitle(github.dates[i] ?? "", github.counts[i] ?? 0, lang)
                                 : L(labels.githubLive)
                             }
-                            style={{ width: "100%", paddingBottom: "100%", borderRadius: 2, background: bg }}
+                            className="aspect-square rounded-sm"
+                            style={{ background: bg }}
                           />
                         ))}
                   </div>
                 </div>
               </div>
               {github && (
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "6px 16px",
-                    flexWrap: "wrap",
-                    marginTop: 12,
-                    fontSize: 12,
-                    color: color.muted,
-                  }}
-                >
+                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted">
                   {github.publicRepos !== null && (
                     <span>
-                      <b style={{ color: color.text, fontWeight: 600 }}>
+                      <b className="font-semibold text-text">
                         <CountUp value={github.publicRepos} />
                       </b>{" "}
                       {L(labels.githubRepos)}
@@ -837,7 +604,7 @@ export default function Home() {
                   )}
                   {github.followers !== null && (
                     <span>
-                      <b style={{ color: color.text, fontWeight: 600 }}>
+                      <b className="font-semibold text-text">
                         <CountUp value={github.followers} />
                       </b>{" "}
                       {L(labels.githubFollowers)}
@@ -845,7 +612,7 @@ export default function Home() {
                   )}
                   {github.totalStars > 0 && (
                     <span>
-                      <b style={{ color: color.yellow, fontWeight: 600 }}>
+                      <b className="font-semibold text-yellow">
                         ★ <CountUp value={github.totalStars} />
                       </b>{" "}
                       {L(labels.totalStars)}
@@ -854,33 +621,24 @@ export default function Home() {
                 </div>
               )}
               {github && github.longestStreak > 0 && (
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "6px 16px",
-                    flexWrap: "wrap",
-                    marginTop: 6,
-                    fontSize: 12,
-                    color: color.muted,
-                  }}
-                >
+                <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted">
                   <span>
                     {L(labels.currentStreak)}{" "}
-                    <b style={{ color: color.green, fontWeight: 600 }}>
+                    <b className="font-semibold text-green">
                       <CountUp value={github.currentStreak} />
                     </b>{" "}
                     {L(labels.days)}
                   </span>
                   <span>
                     {L(labels.longestStreak)}{" "}
-                    <b style={{ color: color.text, fontWeight: 600 }}>
+                    <b className="font-semibold text-text">
                       <CountUp value={github.longestStreak} />
                     </b>{" "}
                     {L(labels.days)}
                   </span>
                 </div>
               )}
-              <div style={{ fontSize: 12, color: color.muted, lineHeight: 1.6, marginTop: 10 }}>
+              <div className="mt-2.5 text-xs leading-[1.6] text-muted">
                 {L(labels.githubNote)}{" "}
                 <a href={links.github} target="_blank" rel="noopener noreferrer">
                   github.com/Ruthgyeul
@@ -889,50 +647,34 @@ export default function Home() {
             </Card>
 
             {/* In progress — real recent commits when available */}
-            <Card style={{ gridColumn: "span 4" }} delay={0.3}>
-              <SectionLabel>{L(labels.inProgress)}</SectionLabel>
+            <Card delay={0.3} className="lg:col-span-4">
+              <SectionLabel className="mb-3.5">{L(labels.inProgress)}</SectionLabel>
               {github && github.recent.length > 0 ? (
-                <div style={{ fontSize: 12.5, lineHeight: 1.7, color: color.muted }}>
+                <div className="text-[12.5px] leading-[1.7] text-muted">
                   <div>
-                    On branch <span style={{ color: color.accentSoft }}>main</span>
+                    On branch <span className="text-accent-soft">main</span>
                   </div>
-                  <div style={{ marginTop: 6, color: color.textDim }}>{L(labels.recentActivity)}:</div>
+                  <div className="mt-1.5 text-text-dim">{L(labels.recentActivity)}:</div>
                   {github.recent.map((a, i) => (
-                    <div key={i} style={{ marginTop: 9 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                        <span style={{ color: color.green }}>●</span>
+                    <div key={i} className="mt-2.25">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="text-green">●</span>
                         <a
                           href={a.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover-accent"
-                          style={{ color: color.text, textDecoration: "none" }}
+                          className="hover-accent text-text no-underline"
                         >
                           {a.repo}
                         </a>
-                        <span
-                          style={{
-                            fontSize: 10,
-                            padding: "1px 5px",
-                            border: `1px solid ${color.border}`,
-                            borderRadius: 3,
-                            color: color.faint,
-                          }}
-                        >
+                        <span className="rounded-[3px] border border-border px-[5px] py-px text-[10px] text-faint">
                           {a.branch}
                         </span>
-                        <span style={{ marginLeft: "auto", fontSize: 11, color: color.faint }}>{a.date}</span>
+                        <span className="ml-auto text-[11px] text-faint">{a.date}</span>
                       </div>
                       {a.message && (
                         <div
-                          style={{
-                            color: color.muted,
-                            paddingLeft: 14,
-                            marginTop: 2,
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                          }}
+                          className="mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap pl-3.5 text-muted"
                           title={a.message}
                         >
                           {a.message}
@@ -942,22 +684,22 @@ export default function Home() {
                   ))}
                 </div>
               ) : (
-                <div style={{ fontSize: 12.5, lineHeight: 1.95, color: color.muted }}>
+                <div className="text-[12.5px] leading-[1.95] text-muted">
                   <div>
-                    On branch <span style={{ color: color.accentSoft }}>main</span>
+                    On branch <span className="text-accent-soft">main</span>
                   </div>
-                  <div style={{ marginTop: 6, color: color.textDim }}>{L(labels.changes)}</div>
+                  <div className="mt-1.5 text-text-dim">{L(labels.changes)}</div>
                   <div>
-                    <span style={{ color: color.yellow }}>modified:</span> Arbitrum Ambassador{" "}
-                    <span style={{ color: color.green }}>(ongoing)</span>
-                  </div>
-                  <div>
-                    <span style={{ color: color.yellow }}>modified:</span> Hyperbolic Ambassador{" "}
-                    <span style={{ color: color.green }}>(ongoing)</span>
+                    <span className="text-yellow">modified:</span> Arbitrum Ambassador{" "}
+                    <span className="text-green">(ongoing)</span>
                   </div>
                   <div>
-                    <span style={{ color: color.accent }}>new file:</span> Blockchain Valley 6th{" "}
-                    <span style={{ color: color.muted }}>— Senior</span>
+                    <span className="text-yellow">modified:</span> Hyperbolic Ambassador{" "}
+                    <span className="text-green">(ongoing)</span>
+                  </div>
+                  <div>
+                    <span className="text-accent">new file:</span> Blockchain Valley 6th{" "}
+                    <span className="text-muted">— Senior</span>
                   </div>
                 </div>
               )}
@@ -965,62 +707,18 @@ export default function Home() {
 
             {/* Repositories — live from GitHub */}
             {github && github.repos.length > 0 && (
-              <Card id="sec-repos" style={{ gridColumn: "span 12" }} delay={0.33}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginBottom: 14,
-                    flexWrap: "wrap",
-                    gap: 8,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 8,
-                      fontSize: 12,
-                      color: color.muted,
-                      textTransform: "uppercase",
-                      letterSpacing: ".06em",
-                    }}
-                  >
-                    <span style={{ color: color.faint, fontWeight: 600 }}>{"//"}</span>
-                    {L(labels.repositories)}
-                  </div>
-                  <span
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                      fontSize: 11,
-                      color: color.green,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: 6,
-                        height: 6,
-                        borderRadius: 999,
-                        background: color.green,
-                        animation: "pulse 2s ease-in-out infinite",
-                      }}
-                    />
+              <Card id="sec-repos" delay={0.33} className="lg:col-span-12">
+                <div className="mb-3.5 flex flex-wrap items-center justify-between gap-2">
+                  <SectionLabel>{L(labels.repositories)}</SectionLabel>
+                  <span className="flex items-center gap-1.5 text-[11px] text-green">
+                    <LiveDot size={6} />
                     {L(labels.reposLive)}
                   </span>
                 </div>
                 {github.languages.length > 0 && (
                   <LanguageBar languages={github.languages} label={L(labels.languages)} />
                 )}
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                    gap: 12,
-                  }}
-                >
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(min(240px,100%),1fr))] gap-3">
                   {github.repos.map((repo) => (
                     <RepoTile key={repo.name} repo={repo} lang={lang} />
                   ))}
@@ -1029,21 +727,10 @@ export default function Home() {
             )}
 
             {/* Experience */}
-            <Card id="sec-experience" style={{ gridColumn: "span 9" }} delay={0.35}>
-              <SectionLabel>{L(labels.experience)}</SectionLabel>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "2.4fr 1.6fr 1.4fr",
-                    fontSize: 11,
-                    color: color.muted,
-                    textTransform: "uppercase",
-                    letterSpacing: ".05em",
-                    padding: "0 0 8px",
-                    borderBottom: `1px solid ${color.border}`,
-                  }}
-                >
+            <Card id="sec-experience" delay={0.35} className="lg:col-span-9">
+              <SectionLabel className="mb-3.5">{L(labels.experience)}</SectionLabel>
+              <div className="flex flex-col">
+                <div className="hidden border-b border-border pb-2 text-[11px] uppercase tracking-[.05em] text-muted sm:grid sm:grid-cols-[2.4fr_1.6fr_1.4fr]">
                   <span>{L(labels.org)}</span>
                   <span>{L(labels.role)}</span>
                   <span>{L(labels.duration)}</span>
@@ -1051,62 +738,49 @@ export default function Home() {
                 {experience.map((row, i) => (
                   <div
                     key={i}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "2.4fr 1.6fr 1.4fr",
-                      fontSize: 13,
-                      padding: "11px 0",
-                      borderBottom: "1px solid rgba(255,255,255,.05)",
-                    }}
+                    className="grid grid-cols-1 gap-1 border-b border-white/5 py-2.75 text-[13px] sm:grid-cols-[2.4fr_1.6fr_1.4fr] sm:items-center sm:gap-0"
                   >
                     <span>{L(row.org)}</span>
-                    <span style={{ color: color.textDim }}>{L(row.role)}</span>
-                    <span style={{ color: row.color }}>{L(row.duration)}</span>
+                    <span className="text-text-dim">
+                      <span className="text-faint sm:hidden">{L(labels.role)}: </span>
+                      {L(row.role)}
+                    </span>
+                    <span style={{ color: row.color }}>
+                      <span className="text-faint sm:hidden">{L(labels.duration)}: </span>
+                      {L(row.duration)}
+                    </span>
                   </div>
                 ))}
               </div>
             </Card>
 
             {/* Education */}
-            <Card id="sec-education" style={{ gridColumn: "span 4" }} delay={0.4}>
-              <SectionLabel>Inha University</SectionLabel>
-              <div style={{ fontSize: 14, fontWeight: 600 }}>{L(education.degree.title)}</div>
-              <div style={{ fontSize: 12, color: color.muted, marginTop: 4, lineHeight: 1.6 }}>
-                {L(education.degree.note)}
-              </div>
-              <TagRow items={education.degree.tags} small style={{ marginTop: 10 }} />
+            <Card id="sec-education" delay={0.4} className="lg:col-span-4">
+              <SectionLabel className="mb-3.5">Inha University</SectionLabel>
+              <div className="text-sm font-semibold">{L(education.degree.title)}</div>
+              <div className="mt-1 text-xs leading-[1.6] text-muted">{L(education.degree.note)}</div>
+              <TagRow items={education.degree.tags} small className="mt-2.5" />
             </Card>
 
             {/* Blockchain Valley */}
-            <Card style={{ gridColumn: "span 5" }} delay={0.45}>
-              <SectionLabel>Blockchain Valley 6th</SectionLabel>
-              <div style={{ fontSize: 14, fontWeight: 600 }}>{L(education.blockchainValley.title)}</div>
-              <div style={{ fontSize: 12, color: color.muted, marginTop: 4, lineHeight: 1.6 }}>
-                {L(education.blockchainValley.note)}
-              </div>
-              <TagRow items={education.blockchainValley.tags} small style={{ marginTop: 10 }} />
+            <Card delay={0.45} className="lg:col-span-5">
+              <SectionLabel className="mb-3.5">Blockchain Valley 6th</SectionLabel>
+              <div className="text-sm font-semibold">{L(education.blockchainValley.title)}</div>
+              <div className="mt-1 text-xs leading-[1.6] text-muted">{L(education.blockchainValley.note)}</div>
+              <TagRow items={education.blockchainValley.tags} small className="mt-2.5" />
             </Card>
 
             {/* Contact */}
             <Card
               id="sec-contact"
-              style={{
-                gridColumn: "span 12",
-                padding: "14px 20px",
-                display: "flex",
-                alignItems: "center",
-                gap: 28,
-                flexWrap: "wrap",
-                fontSize: 12,
-                color: color.muted,
-              }}
               delay={0.5}
+              className="flex flex-wrap items-center gap-7 px-5 py-3.5 text-xs text-muted lg:col-span-12"
             >
               <span>{L(labels.contact)} —</span>
               <ContactLink href={links.github} label="GitHub · Ruthgyeul" hint="G" />
               <ContactLink href={links.linkedin} label="LinkedIn · leejaeah" hint="L" />
               <ContactLink href={links.instagram} label="Instagram · jae.__.ah" hint="I" />
-              <span style={{ marginLeft: "auto" }}>{L(labels.copyright)}</span>
+              <span className="ml-auto">{L(labels.copyright)}</span>
             </Card>
           </div>
         </div>
@@ -1119,49 +793,40 @@ export default function Home() {
 
 function Card({
   children,
-  style,
+  className = "",
   id,
   delay = 0,
 }: {
   children: React.ReactNode;
-  style?: React.CSSProperties;
+  className?: string;
   id?: string;
   delay?: number;
 }) {
   return (
     <div
       id={id}
-      className="card"
-      style={{
-        background: color.card,
-        border: `1px solid ${color.border}`,
-        borderRadius: 8,
-        padding: 18,
-        animation: "fadeUp .5s ease both",
-        animationDelay: `${delay}s`,
-        ...style,
-      }}
+      className={`card rounded-lg border border-border bg-card p-4.5 [animation:fadeUp_.5s_ease_both] ${className}`}
+      style={{ animationDelay: `${delay}s` }}
     >
       {children}
     </div>
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+/** Small pulsing "live" indicator dot, shared by the header and the two GitHub-data cards. */
+function LiveDot({ size = 8 }: { size?: number }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        fontSize: 12,
-        color: color.muted,
-        textTransform: "uppercase",
-        letterSpacing: ".06em",
-        marginBottom: 14,
-      }}
-    >
-      <span style={{ color: color.faint, fontWeight: 600 }}>{"//"}</span>
+    <span
+      className="shrink-0 rounded-full bg-green [animation:pulse_2s_ease-in-out_infinite]"
+      style={{ width: size, height: size }}
+    />
+  );
+}
+
+function SectionLabel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`flex items-center gap-2 text-xs uppercase tracking-[.06em] text-muted ${className}`}>
+      <span className="font-semibold text-faint">{"//"}</span>
       {children}
     </div>
   );
@@ -1170,24 +835,20 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function TagRow({
   items,
   small = false,
-  style,
+  className = "",
 }: {
   items: readonly string[];
   small?: boolean;
-  style?: React.CSSProperties;
+  className?: string;
 }) {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: small ? 6 : 7, ...style }}>
+    <div className={`flex flex-wrap ${small ? "gap-1.5" : "gap-1.75"} ${className}`}>
       {items.map((item) => (
         <span
           key={item}
-          style={{
-            fontSize: small ? 11 : 12,
-            padding: small ? "3px 8px" : "4px 9px",
-            background: "rgba(255,255,255,.04)",
-            borderRadius: 4,
-            color: color.textDim,
-          }}
+          className={`rounded bg-white/4 text-text-dim ${
+            small ? "px-2 py-0.75 text-[11px]" : "px-2.25 py-1 text-xs"
+          }`}
         >
           {item}
         </span>
@@ -1197,50 +858,25 @@ function TagRow({
 }
 
 function LanguageBar({ languages, label }: { languages: GithubLang[]; label: string }) {
-  const colorFor = (name: string) => (name === "Other" ? color.faint : languageColor(name));
+  const colorFor = (name: string) => (name === "Other" ? "var(--color-faint)" : languageColor(name));
   return (
-    <div style={{ marginBottom: 16 }}>
-      <div
-        style={{
-          fontSize: 11,
-          color: color.muted,
-          textTransform: "uppercase",
-          letterSpacing: ".05em",
-          marginBottom: 8,
-        }}
-      >
-        {label}
-      </div>
+    <div className="mb-4">
+      <div className="mb-2 text-[11px] uppercase tracking-[.05em] text-muted">{label}</div>
       <div
         role="img"
         aria-label={`${label}: ${languages.map((l) => `${l.name} ${l.pct}%`).join(", ")}`}
-        style={{
-          display: "flex",
-          width: "100%",
-          height: 8,
-          borderRadius: 999,
-          overflow: "hidden",
-          background: color.cardInset,
-        }}
+        className="flex h-2 w-full overflow-hidden rounded-full bg-card-inset"
       >
         {languages.map((lng) => (
-          <div
-            key={lng.name}
-            aria-hidden
-            title={`${lng.name} · ${lng.pct}%`}
-            style={{ width: `${lng.pct}%`, background: colorFor(lng.name) }}
-          />
+          <div key={lng.name} aria-hidden style={{ width: `${lng.pct}%`, background: colorFor(lng.name) }} />
         ))}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: 10 }}>
+      <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5">
         {languages.map((lng) => (
-          <span
-            key={lng.name}
-            style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: color.textDim }}
-          >
-            <span style={{ width: 9, height: 9, borderRadius: 999, background: colorFor(lng.name) }} />
+          <span key={lng.name} className="flex items-center gap-1.5 text-xs text-text-dim">
+            <span className="h-2.25 w-2.25 rounded-full" style={{ background: colorFor(lng.name) }} />
             {lng.name}
-            <span style={{ color: color.faint }}>{lng.pct}%</span>
+            <span className="text-faint">{lng.pct}%</span>
           </span>
         ))}
       </div>
@@ -1254,62 +890,31 @@ function RepoTile({ repo, lang }: { repo: GithubRepo; lang: Lang }) {
       href={repo.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="repo-tile"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        background: color.cardInset,
-        border: `1px solid ${color.borderSoft}`,
-        borderRadius: 6,
-        padding: "12px 14px",
-        textDecoration: "none",
-        minHeight: 104,
-      }}
+      className="repo-tile flex min-h-26 flex-col gap-2 rounded-md border border-border-soft bg-card-inset px-3.5 py-3 no-underline"
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-        <svg width="14" height="14" viewBox="0 0 16 16" fill={color.muted} aria-hidden>
+      <div className="flex items-center gap-1.75">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden className="text-muted">
           <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z" />
         </svg>
-        <span style={{ color: color.text, fontWeight: 600, fontSize: 13, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        <span className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-[13px] font-semibold text-text">
           {repo.name}
         </span>
         {repo.archived && (
-          <span
-            style={{
-              fontSize: 9.5,
-              padding: "1px 5px",
-              border: `1px solid ${color.borderSoft}`,
-              borderRadius: 3,
-              color: color.faint,
-              textTransform: "uppercase",
-              letterSpacing: ".04em",
-              flex: "none",
-            }}
-          >
+          <span className="flex-none rounded-[3px] border border-border-soft px-[5px] py-px text-[9.5px] uppercase tracking-[.04em] text-faint">
             {t(labels.archived, lang)}
           </span>
         )}
       </div>
-      <div className="clamp-2" style={{ fontSize: 12, color: color.muted, lineHeight: 1.5, flex: 1 }}>
-        {repo.description || "—"}
-      </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 11.5, color: color.faint }}>
+      <div className="clamp-2 flex-1 text-xs leading-[1.5] text-muted">{repo.description || "—"}</div>
+      <div className="flex items-center gap-3.5 text-[11.5px] text-faint">
         {repo.language && (
-          <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
-            <span
-              style={{
-                width: 9,
-                height: 9,
-                borderRadius: 999,
-                background: languageColor(repo.language),
-              }}
-            />
+          <span className="flex items-center gap-1.25">
+            <span className="h-2.25 w-2.25 rounded-full" style={{ background: languageColor(repo.language) }} />
             {repo.language}
           </span>
         )}
         <span>★ {repo.stars}</span>
-        <span style={{ marginLeft: "auto" }}>{relativeTime(repo.pushedAt, lang)}</span>
+        <span className="ml-auto">{relativeTime(repo.pushedAt, lang)}</span>
       </div>
     </a>
   );
@@ -1321,18 +926,7 @@ function SocialButton({ href, label }: { href: string; label: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="hover-accent"
-      style={{
-        flex: 1,
-        textAlign: "center",
-        background: "rgba(255,255,255,.03)",
-        border: "1px solid rgba(255,255,255,.1)",
-        borderRadius: 6,
-        padding: 9,
-        fontSize: 12,
-        color: color.text,
-        textDecoration: "none",
-      }}
+      className="hover-accent flex-1 rounded-md border border-border-subtle bg-white/3 p-2.25 text-center text-xs text-text no-underline"
     >
       {label}
     </a>
@@ -1345,26 +939,11 @@ function ContactLink({ href, label, hint }: { href: string; label: string; hint:
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="hover-accent"
-      style={{
-        color: color.text,
-        textDecoration: "none",
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-      }}
+      className="hover-accent flex items-center gap-1.5 text-text no-underline"
     >
-      <span style={{ width: 6, height: 6, borderRadius: 999, background: color.green }} />
+      <span className="h-1.5 w-1.5 rounded-full bg-green" />
       {label}
-      <span
-        style={{
-          fontSize: 10,
-          padding: "1px 5px",
-          border: "1px solid rgba(255,255,255,.15)",
-          borderRadius: 3,
-          color: color.faint,
-        }}
-      >
+      <span className="rounded-[3px] border border-border-pill px-[5px] py-px text-[10px] text-faint">
         {hint}
       </span>
     </a>
@@ -1373,44 +952,33 @@ function ContactLink({ href, label, hint }: { href: string; label: string; hint:
 
 function CodeBlock() {
   return (
-    <div
-      style={{
-        background: color.cardInset,
-        border: `1px solid ${color.borderSoft}`,
-        borderRadius: 6,
-        padding: "12px 14px",
-        fontSize: 12.5,
-        lineHeight: 1.8,
-        display: "flex",
-        gap: 12,
-      }}
-    >
-      <div style={{ color: color.gutter, textAlign: "right", userSelect: "none" }}>
+    <div className="flex gap-3 overflow-x-auto rounded-md border border-border-soft bg-card-inset px-3.5 py-3 text-[12.5px] leading-[1.8]">
+      <div className="select-none text-right text-gutter">
         1<br />2<br />3<br />4<br />5
       </div>
-      <div>
+      <div className="whitespace-pre">
         <div>
-          <span style={{ color: color.muted }}>const</span>{" "}
-          <span style={{ color: color.accentSoft }}>profile</span>{" "}
-          <span style={{ color: color.muted }}>=</span> {"{"}
+          <span className="text-muted">const</span>{" "}
+          <span className="text-accent-soft">profile</span>{" "}
+          <span className="text-muted">=</span> {"{"}
         </div>
-        <div style={{ paddingLeft: 16 }}>
-          <span style={{ color: color.pink }}>role</span>:{" "}
-          <span style={{ color: color.lime }}>&apos;Full-Stack Developer&apos;</span>,
+        <div className="pl-4">
+          <span className="text-pink">role</span>:{" "}
+          <span className="text-lime">&apos;Full-Stack Developer&apos;</span>,
         </div>
-        <div style={{ paddingLeft: 16 }}>
-          <span style={{ color: color.pink }}>focus</span>: [
-          <span style={{ color: color.lime }}>&apos;web3&apos;</span>,{" "}
-          <span style={{ color: color.lime }}>&apos;blockchain&apos;</span>,{" "}
-          <span style={{ color: color.lime }}>&apos;cloud&apos;</span>],
+        <div className="pl-4">
+          <span className="text-pink">focus</span>: [
+          <span className="text-lime">&apos;web3&apos;</span>,{" "}
+          <span className="text-lime">&apos;blockchain&apos;</span>,{" "}
+          <span className="text-lime">&apos;cloud&apos;</span>],
         </div>
-        <div style={{ paddingLeft: 16 }}>
-          <span style={{ color: color.pink }}>status</span>:{" "}
-          <span style={{ color: color.yellow }}>&apos;available&apos;</span>
+        <div className="pl-4">
+          <span className="text-pink">status</span>:{" "}
+          <span className="text-yellow">&apos;available&apos;</span>
         </div>
         <div>
           {"}"}
-          <span style={{ color: color.green, animation: "pulse .9s step-end infinite" }}>▌</span>
+          <span className="text-green [animation:pulse_.9s_step-end_infinite]">▌</span>
         </div>
       </div>
     </div>
