@@ -43,8 +43,8 @@ export const bootLines: Record<Lang, string[]> = {
 };
 
 export const bio: I18nText = {
-  ko: "웹3, 블록체인, 클라우드 전반을 다루는 풀스택 개발자입니다. 인하대학교 컴퓨터공학과에서 공부하며 실제 서비스와 스마트 컨트랙트를 만듭니다.",
-  en: "A full-stack developer working across Web3, blockchain and cloud. Studying Computer Science Engineering at Inha University while shipping real services and smart contracts.",
+  ko: "Solidity 스마트 컨트랙트부터 Next.js 프로덕션 서비스까지, 웹3·블록체인·클라우드 전반을 만드는 풀스택 개발자입니다. 인하대학교 컴퓨터공학과에 재학 중입니다.",
+  en: "A full-stack developer building across Web3, blockchain and cloud — from Solidity smart contracts to production services in Next.js. Studying Computer Science Engineering at Inha University.",
 };
 
 export const statusLine: I18nText = {
