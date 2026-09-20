@@ -12,22 +12,25 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "next": "^16.2.11",
+    "next": "^16.3.5",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
-  "//overrides": "Force patched transitive deps that Next still pins to vulnerable versions: postcss (GHSA-qx2v-qp2m-jg93, GHSA-6g55-p6wh-862q) and sharp/libvips (GHSA-f88m-g3jw-g9cj). Both are same-major, backward-compatible bumps. Revisit when a Next release ships the patched versions itself.",
+  "//overrides": "Force patched transitive deps that Next still pins to vulnerable versions: postcss (GHSA-fxqj-rqcc-2cmp) and sharp/libvips (GHSA-rgj7-g3m4-5g8c). Both are same-major, backward-compatible bumps. Revisit when a Next release ships the patched versions itself.",
   "overrides": {
-    "postcss": "^8.5.22",
-    "sharp": "^0.35.3",
+    "postcss": "^8.5.28",
+    "sharp": "^0.35.4",
     "@eslint/plugin-kit": "^0.3.4"
   },
+  "//vitest": "vitest 3.x has a moderate path-traversal advisory in @vitest/mocker (GHSA-82fw-gwwq-j7x9), test-only impact. Fix needs a vitest 5.x major bump — tracked as separate follow-up work, not bundled here.",
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "22.14.0",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
     "eslint": "9.18.0",
-    "eslint-config-next": "^16.2.11",
+    "eslint-config-next": "^16.3.5",
+    "tailwindcss": "^4.3.3",
     "typescript": "5.7.3",
     "vitest": "^3.2.7"
   }
