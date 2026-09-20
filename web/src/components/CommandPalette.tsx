@@ -1,5 +1,3 @@
-import { color } from "@/lib/theme";
-
 export interface PaletteItem {
   label: string;
   tag: string;
@@ -26,95 +24,38 @@ export function CommandPalette({
   return (
     <div
       onClick={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 200,
-        background: "rgba(4,6,10,.7)",
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        paddingTop: "14vh",
-      }}
+      className="fixed inset-0 z-[200] flex items-start justify-center bg-[rgba(4,6,10,.7)] pt-[14vh]"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={placeholder}
         onClick={(e) => e.stopPropagation()}
-        style={{
-          width: 520,
-          maxWidth: "90vw",
-          background: color.card,
-          border: `1px solid rgba(255,255,255,.12)`,
-          borderRadius: 10,
-          boxShadow: "0 24px 60px rgba(0,0,0,.5)",
-          overflow: "hidden",
-        }}
+        className="w-[520px] max-w-[90vw] overflow-hidden rounded-[10px] border border-border-overlay bg-card shadow-[0_24px_60px_rgba(0,0,0,.5)]"
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            padding: "12px 16px",
-            borderBottom: `1px solid ${color.border}`,
-          }}
-        >
-          <span style={{ color: color.faint }}>$</span>
+        <div className="flex items-center gap-2.5 border-b border-border px-4 py-3">
+          <span className="text-faint">$</span>
           <input
             value={query}
             onChange={(e) => onQueryChange(e.target.value)}
             autoFocus
             placeholder={placeholder}
             aria-label={placeholder}
-            style={{
-              flex: 1,
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              color: color.text,
-              fontFamily: "inherit",
-              fontSize: 14,
-            }}
+            className="flex-1 bg-transparent font-[inherit] text-sm text-text outline-none"
           />
-          <span
-            style={{
-              fontSize: 10,
-              color: color.faint,
-              border: `1px solid rgba(255,255,255,.12)`,
-              borderRadius: 3,
-              padding: "1px 5px",
-            }}
-          >
+          <span className="rounded-[3px] border border-border-overlay px-[5px] py-px text-[10px] text-faint">
             ESC
           </span>
         </div>
-        <div style={{ maxHeight: 320, overflow: "auto", padding: 6 }}>
+        <div className="max-h-80 overflow-auto p-1.5">
           {items.map((item, i) => (
             <button
               key={i}
               onClick={item.run}
-              className="hover-soft"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 10,
-                width: "100%",
-                textAlign: "left",
-                background: "transparent",
-                border: "none",
-                color: color.text,
-                fontFamily: "inherit",
-                fontSize: 13,
-                padding: "10px 12px",
-                borderRadius: 6,
-                cursor: "pointer",
-              }}
+              className="hover-soft flex min-h-11 w-full cursor-pointer items-center justify-between gap-2.5 rounded-md border-none bg-transparent px-3 py-2.5 text-left font-[inherit] text-[13px] text-text"
             >
               <span>{item.label}</span>
-              <span style={{ fontSize: 10, color: color.faint }}>{item.tag}</span>
+              <span className="text-[10px] text-faint">{item.tag}</span>
             </button>
           ))}
         </div>

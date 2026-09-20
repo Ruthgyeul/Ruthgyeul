@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { color } from "@/lib/theme";
 import { TerminalBar } from "./TerminalBar";
 
 interface DetailRow {
@@ -26,32 +25,24 @@ export function ErrorScreen({
   details: DetailRow[];
 }) {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: color.bg }}>
+    <div className="flex min-h-screen flex-col bg-bg">
       <TerminalBar />
-      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 40 }}>
-        <div style={{ maxWidth: 520, width: "100%" }}>
-          <div style={{ fontSize: 13, color: color.muted, marginBottom: 6 }}>
-            jaeah@ruthgyeul<span style={{ color: color.faint }}>:~$</span> {command}
+      <div className="flex flex-1 items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-[520px]">
+          <div className="mb-1.5 text-[13px] text-muted">
+            jaeah@ruthgyeul<span className="text-faint">:~$</span> {command}
           </div>
-          <div style={{ fontSize: 64, fontWeight: 700, color: codeColor, lineHeight: 1, margin: "18px 0 8px" }}>
+          <div className="my-[18px] text-5xl font-bold leading-none sm:text-[64px]" style={{ color: codeColor }}>
             {code}
           </div>
-          <div style={{ fontSize: 15, color: color.textDim, marginBottom: 18 }}>{message}</div>
-          <div
-            style={{
-              background: color.card,
-              border: `1px solid ${color.border}`,
-              borderRadius: 8,
-              padding: "16px 18px",
-              fontSize: 12.5,
-              lineHeight: 1.8,
-              color: color.muted,
-            }}
-          >
+          <div className="mb-[18px] text-[15px] text-text-dim">{message}</div>
+          <div className="rounded-lg border border-border bg-card px-[18px] py-4 text-[12.5px] leading-[1.8] text-muted">
             {details.map((d) => (
               <div key={d.key}>
-                <span style={{ color: color.pink }}>{d.key}</span>:{" "}
-                <span style={{ color: d.valueColor ?? color.lime }}>{d.value}</span>
+                <span className="text-pink">{d.key}</span>:{" "}
+                <span style={{ color: d.valueColor }} className={d.valueColor ? "" : "text-lime"}>
+                  {d.value}
+                </span>
               </div>
             ))}
           </div>
@@ -59,17 +50,7 @@ export function ErrorScreen({
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/"
-            style={{
-              display: "inline-block",
-              marginTop: 22,
-              background: "rgba(255,255,255,.03)",
-              border: "1px solid rgba(255,255,255,.12)",
-              borderRadius: 6,
-              padding: "10px 16px",
-              fontSize: 13,
-              color: color.text,
-              textDecoration: "none",
-            }}
+            className="mt-[22px] inline-flex min-h-11 items-center rounded-md border border-border-overlay bg-white/3 px-4 text-[13px] text-text no-underline"
           >
             ← Back to home
           </a>

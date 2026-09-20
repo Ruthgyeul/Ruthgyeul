@@ -17,7 +17,7 @@ const plexMono = IBM_Plex_Mono({
 const SITE_URL = "https://ruthgyeul.xyz";
 const TITLE = "Jaeah Lee — Full-Stack Developer";
 const DESCRIPTION =
-  "이재아 / Jaeah Lee — Web3, blockchain and cloud full-stack developer. Inha University CSE. Building real services, smart contracts and dApps.";
+  "이재아 / Jaeah Lee — 웹3·블록체인·클라우드를 다루는 풀스택 개발자. Web3, blockchain and cloud full-stack developer. Inha University CSE. Building real services, smart contracts and dApps.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
